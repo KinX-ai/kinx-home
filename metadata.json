@@ -1,0 +1,8 @@
+{
+  "name": "Kinx Auto - Landing Page Tự Động Hóa Video AI",
+  "description": "Landing Page chuyển đổi cao cho phần mềm Kinx Auto - Giải pháp tự động hóa tạo video AI, Veo 3.1 không giới hạn, nhân vật đồng nhất và tạo truyện tranh hàng loạt.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
