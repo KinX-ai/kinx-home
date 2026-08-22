@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Globe, Check, ChevronDown, Sparkles } from 'lucide-react';
+import { Globe, Check, ChevronDown, Sparkles, MapPin, RotateCw } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/types';
@@ -13,8 +13,9 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   variant = 'navbar',
   className = ''
 }) => {
-  const { language, currentLanguageOption, setLanguage, availableLanguages, detectedInfo } = useLanguage();
+  const { language, currentLanguageOption, setLanguage, availableLanguages, detectedInfo, redetectLanguage, isDetecting } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -29,8 +30,17 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   }, []);
 
   const handleSelect = (code: Language) => {
-    setLanguage(code);
+    setLanguage(code, true);
     setIsOpen(false);
+  };
+
+  const handleAutoDetect = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsRefreshing(true);
+    await redetectLanguage();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 600);
   };
 
   // Footer display variant (Horizontal buttons or clear selectors)
@@ -235,6 +245,27 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                   </button>
                 );
               })}
+            </div>
+
+            {/* Auto IP info & Re-detect button */}
+            <div className="mt-2 pt-2 border-t border-slate-800/80">
+              <button
+                onClick={handleAutoDetect}
+                disabled={isDetecting || isRefreshing}
+                className="w-full flex items-center justify-between px-2 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 text-[11px] transition-all border border-slate-800 hover:border-slate-700 cursor-pointer"
+                title="Quét lại địa chỉ IP để tự động chuyển ngôn ngữ theo quốc gia"
+              >
+                <span className="flex items-center gap-1.5 truncate">
+                  <MapPin className="w-3 h-3 text-cyan-400 shrink-0" />
+                  <span className="truncate">
+                    IP: <strong className="text-slate-200">{detectedInfo?.country || 'Auto'}</strong>
+                  </span>
+                </span>
+                <span className="flex items-center gap-1 text-[10px] text-purple-400 font-semibold shrink-0">
+                  <RotateCw className={`w-3 h-3 ${isRefreshing || isDetecting ? 'animate-spin' : ''}`} />
+                  <span>Quét lại</span>
+                </span>
+              </button>
             </div>
           </motion.div>
         )}

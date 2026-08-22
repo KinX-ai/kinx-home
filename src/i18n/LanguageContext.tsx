@@ -13,18 +13,20 @@ interface GeoDetectionInfo {
 interface LanguageContextType {
   language: Language;
   currentLanguageOption: LanguageOption;
-  setLanguage: (lang: Language) => void;
+  setLanguage: (lang: Language, isManualChoice?: boolean) => void;
   t: (path: string, fallback?: string) => any;
   detectedInfo: GeoDetectionInfo | null;
   showGeoToast: boolean;
   dismissGeoToast: () => void;
   isDetecting: boolean;
   availableLanguages: LanguageOption[];
+  redetectLanguage: () => Promise<void>;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'kinx_user_language_v1';
+const MANUAL_OVERRIDE_KEY = 'kinx_user_manual_lang_override';
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>('vi');
@@ -39,6 +41,11 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     if (code === 'JP') return 'ja';
     if (['CN', 'TW', 'HK', 'MO', 'SG'].includes(code)) return 'zh';
 
+    if (code) {
+      // Any other country code (US, GB, FR, DE, KR, AU, CA, SG, etc.) defaults to English
+      return 'en';
+    }
+
     if (localeStr) {
       const loc = localeStr.toLowerCase();
       if (loc.startsWith('vi')) return 'vi';
@@ -50,10 +57,13 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     return 'en';
   };
 
-  const setLanguage = useCallback((newLang: Language) => {
+  const setLanguage = useCallback((newLang: Language, isManualChoice = true) => {
     setLanguageState(newLang);
     try {
       localStorage.setItem(STORAGE_KEY, newLang);
+      if (isManualChoice) {
+        localStorage.setItem(MANUAL_OVERRIDE_KEY, 'true');
+      }
       document.documentElement.lang = newLang;
     } catch (e) {
       // ignore localstorage error
@@ -65,99 +75,123 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, []);
 
   // IP & Geolocation Detection
-  useEffect(() => {
-    let isMounted = true;
-
-    const detectLanguageFromIP = async () => {
-      try {
+  const runDetection = useCallback(async (force = false) => {
+    setIsDetecting(true);
+    try {
+      // Check manual override if not forced
+      if (!force) {
+        const manualOverride = localStorage.getItem(MANUAL_OVERRIDE_KEY);
         const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
-        if (savedLang && ['vi', 'en', 'ja', 'zh'].includes(savedLang)) {
-          if (isMounted) {
-            setLanguageState(savedLang);
-            document.documentElement.lang = savedLang;
-            setIsDetecting(false);
-          }
+        if (manualOverride === 'true' && savedLang && ['vi', 'en', 'ja', 'zh'].includes(savedLang)) {
+          setLanguageState(savedLang);
+          document.documentElement.lang = savedLang;
+          setIsDetecting(false);
           return;
         }
+      }
 
-        // Try server-side /api/geo first
-        let detectedCountry = '';
-        let detectedIp = '';
-        let source = '';
+      let detectedCountry = '';
+      let detectedIp = '';
+      let detectedCountryName = '';
+      let source = '';
 
+      // 1. Try server-side /api/geo first
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 1800);
+        const res = await fetch('/api/geo', { signal: controller.signal });
+        clearTimeout(timer);
+        if (res.ok) {
+          const data = await res.json();
+          if (data?.country && data.country !== 'unknown') {
+            detectedCountry = String(data.country).toUpperCase();
+            detectedIp = data.ip || '';
+            source = data.source || 'server_geo';
+          }
+        }
+      } catch (e) {
+        // Fallback to client-side detection
+      }
+
+      // 2. Client-side fallback: get.geojs.io
+      if (!detectedCountry) {
         try {
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 2000);
-          const res = await fetch('/api/geo', { signal: controller.signal });
+          const timer = setTimeout(() => controller.abort(), 1600);
+          const clientGeo = await fetch('https://get.geojs.io/v1/ip/country.json', { signal: controller.signal });
           clearTimeout(timer);
-          if (res.ok) {
-            const data = await res.json();
+          if (clientGeo.ok) {
+            const data = await clientGeo.json();
             if (data?.country) {
-              detectedCountry = data.country;
-              detectedIp = data.ip || '';
-              source = data.source || 'server_geo';
+              detectedCountry = String(data.country).toUpperCase();
+              detectedCountryName = data.name || '';
+              source = 'geojs_client';
             }
           }
         } catch (e) {
-          // Fallback to client-side detection
-        }
-
-        // Client-side fallback if server didn't get it
-        if (!detectedCountry) {
-          try {
-            const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), 1800);
-            const clientGeo = await fetch('https://api.country.is/', { signal: controller.signal });
-            clearTimeout(timer);
-            if (clientGeo.ok) {
-              const data = await clientGeo.json();
-              if (data?.country) {
-                detectedCountry = data.country;
-                detectedIp = data.ip || '';
-                source = 'client_country_is';
-              }
-            }
-          } catch (e) {
-            // next fallback
-          }
-        }
-
-        const navLang = navigator.language || (navigator.languages && navigator.languages[0]) || '';
-        const targetLang = mapCountryToLang(detectedCountry, navLang);
-
-        if (isMounted) {
-          setLanguageState(targetLang);
-          document.documentElement.lang = targetLang;
-          setDetectedInfo({
-            ip: detectedIp,
-            country: detectedCountry || (targetLang === 'vi' ? 'VN' : targetLang === 'ja' ? 'JP' : targetLang === 'zh' ? 'CN' : 'US'),
-            source: source || 'browser_locale',
-            autoSwitched: true
-          });
-
-          // Show subtle notification only if user is non-Vietnamese or language is switched
-          if (targetLang !== 'vi') {
-            setShowGeoToast(true);
-            // Auto hide after 8 seconds
-            setTimeout(() => {
-              if (isMounted) setShowGeoToast(false);
-            }, 8000);
-          }
-          setIsDetecting(false);
-        }
-      } catch (err) {
-        if (isMounted) {
-          setIsDetecting(false);
+          // next fallback
         }
       }
-    };
 
-    detectLanguageFromIP();
+      // 3. Client-side fallback: api.country.is
+      if (!detectedCountry) {
+        try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 1600);
+          const clientGeo = await fetch('https://api.country.is/', { signal: controller.signal });
+          clearTimeout(timer);
+          if (clientGeo.ok) {
+            const data = await clientGeo.json();
+            if (data?.country) {
+              detectedCountry = String(data.country).toUpperCase();
+              detectedIp = data.ip || detectedIp;
+              source = 'country_is_client';
+            }
+          }
+        } catch (e) {
+          // next fallback
+        }
+      }
 
-    return () => {
-      isMounted = false;
-    };
+      const navLang = navigator.language || (navigator.languages && navigator.languages[0]) || '';
+      const targetLang = mapCountryToLang(detectedCountry, navLang);
+
+      setLanguageState(targetLang);
+      document.documentElement.lang = targetLang;
+      localStorage.setItem(STORAGE_KEY, targetLang);
+      if (force) {
+        localStorage.removeItem(MANUAL_OVERRIDE_KEY);
+      }
+
+      setDetectedInfo({
+        ip: detectedIp,
+        country: detectedCountry || (targetLang === 'vi' ? 'VN' : targetLang === 'ja' ? 'JP' : targetLang === 'zh' ? 'CN' : 'US'),
+        countryName: detectedCountryName || (detectedCountry === 'VN' ? 'Vietnam' : detectedCountry === 'JP' ? 'Japan' : detectedCountry ? detectedCountry : 'Auto'),
+        source: source || 'browser_locale',
+        autoSwitched: true
+      });
+
+      // Show toast if detected country is international or not Vietnamese
+      if (targetLang !== 'vi' || detectedCountry !== 'VN') {
+        setShowGeoToast(true);
+        setTimeout(() => {
+          setShowGeoToast(false);
+        }, 8000);
+      }
+      setIsDetecting(false);
+    } catch (err) {
+      setIsDetecting(false);
+    }
   }, []);
+
+  const redetectLanguage = useCallback(async () => {
+    await runDetection(true);
+  }, [runDetection]);
+
+  // Initial detection on mount
+  useEffect(() => {
+    runDetection(false);
+  }, [runDetection]);
 
   // Nested dictionary accessor function: t('hero.titleHighlight1')
   const t = useCallback(

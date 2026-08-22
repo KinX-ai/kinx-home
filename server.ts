@@ -16,14 +16,27 @@ async function startServer() {
   // API Detect Language & IP Geolocation
   app.get(["/api/geo", "/api/detect-language"], async (req, res) => {
     try {
-      // 1. Check Cloudflare or Reverse Proxy headers first
-      const cfCountry = (req.headers["cf-ipcountry"] || req.headers["x-country-code"] || "") as string;
+      // 1. Check Cloudflare, Google Cloud, Fastly, or reverse proxy country headers
+      const cfCountry = (
+        req.headers["cf-ipcountry"] ||
+        req.headers["x-country-code"] ||
+        req.headers["x-appengine-country"] ||
+        req.headers["geoip-country-code"] ||
+        ""
+      ) as string;
       const acceptLang = (req.headers["accept-language"] || "") as string;
       
       // Determine client IP
       const xForwardedFor = req.headers["x-forwarded-for"];
+      const xRealIp = req.headers["x-real-ip"];
+      const xClientIp = req.headers["x-client-ip"];
       let clientIp = "";
-      if (typeof xForwardedFor === "string") {
+      
+      if (typeof xRealIp === "string" && xRealIp) {
+        clientIp = xRealIp.trim();
+      } else if (typeof xClientIp === "string" && xClientIp) {
+        clientIp = xClientIp.trim();
+      } else if (typeof xForwardedFor === "string" && xForwardedFor) {
         clientIp = xForwardedFor.split(",")[0].trim();
       } else if (Array.isArray(xForwardedFor) && xForwardedFor.length > 0) {
         clientIp = xForwardedFor[0].trim();
@@ -31,15 +44,41 @@ async function startServer() {
         clientIp = req.socket.remoteAddress || "";
       }
 
+      // Clean IPv6 prefix
+      if (clientIp.startsWith("::ffff:")) {
+        clientIp = clientIp.replace("::ffff:", "");
+      }
+
       let detectedCountry = cfCountry ? cfCountry.toUpperCase() : "";
 
-      // 2. If no header country and IP is not local, try external IP geo lookup with 1.5s timeout
-      const isLocalIp = !clientIp || clientIp === "127.0.0.1" || clientIp === "::1" || clientIp.startsWith("192.168.") || clientIp.startsWith("10.") || clientIp.startsWith("172.");
-      
+      // 2. If no header country and IP is public, try external IP geo lookup
+      const isLocalIp =
+        !clientIp ||
+        clientIp === "127.0.0.1" ||
+        clientIp === "::1" ||
+        clientIp.startsWith("192.168.") ||
+        clientIp.startsWith("10.") ||
+        clientIp.startsWith("172.16.") ||
+        clientIp.startsWith("172.17.") ||
+        clientIp.startsWith("172.18.") ||
+        clientIp.startsWith("172.19.") ||
+        clientIp.startsWith("172.20.") ||
+        clientIp.startsWith("172.21.") ||
+        clientIp.startsWith("172.22.") ||
+        clientIp.startsWith("172.23.") ||
+        clientIp.startsWith("172.24.") ||
+        clientIp.startsWith("172.25.") ||
+        clientIp.startsWith("172.26.") ||
+        clientIp.startsWith("172.27.") ||
+        clientIp.startsWith("172.28.") ||
+        clientIp.startsWith("172.29.") ||
+        clientIp.startsWith("172.30.") ||
+        clientIp.startsWith("172.31.");
+
       if (!detectedCountry && !isLocalIp) {
         try {
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 1500);
+          const timeoutId = setTimeout(() => controller.abort(), 1200);
           const geoRes = await fetch(`https://api.country.is/${clientIp}`, { signal: controller.signal });
           clearTimeout(timeoutId);
           if (geoRes.ok) {
@@ -49,7 +88,21 @@ async function startServer() {
             }
           }
         } catch (e) {
-          // fallback to next detection
+          // secondary fallback
+          try {
+            const controller2 = new AbortController();
+            const timeoutId2 = setTimeout(() => controller2.abort(), 1200);
+            const geoRes2 = await fetch(`https://get.geojs.io/v1/ip/country/${clientIp}.json`, { signal: controller2.signal });
+            clearTimeout(timeoutId2);
+            if (geoRes2.ok) {
+              const geoData2 = await geoRes2.json();
+              if (geoData2?.country) {
+                detectedCountry = String(geoData2.country).toUpperCase();
+              }
+            }
+          } catch (e2) {
+            // ignore
+          }
         }
       }
 
@@ -62,6 +115,9 @@ async function startServer() {
         recommendedLang = "ja";
       } else if (["CN", "TW", "HK", "MO", "SG"].includes(detectedCountry)) {
         recommendedLang = "zh";
+      } else if (detectedCountry) {
+        // Any other international country defaults to English
+        recommendedLang = "en";
       } else {
         // Fallback to Accept-Language header if available
         const lowerLang = acceptLang.toLowerCase();
