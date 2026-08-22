@@ -25,7 +25,6 @@ import { LeadModal } from './components/LeadModal';
 import { LegalDisclaimerModal } from './components/LegalDisclaimerModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { FloatingChatWidget } from './components/FloatingChatWidget';
-import { GeoLanguageToast } from './components/LanguageSelector';
 
 export default function App() {
   const [sections, setSections] = useState<SectionConfig[]>(INITIAL_SECTIONS);
@@ -282,9 +281,6 @@ export default function App() {
         onClose={() => setIsLegalModalOpen(false)}
         initialTab={legalInitialTab}
       />
-
-      {/* Auto-detected IP Language Notification Toast */}
-      <GeoLanguageToast />
     </div>
   );
 }

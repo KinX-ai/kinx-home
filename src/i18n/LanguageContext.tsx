@@ -16,8 +16,6 @@ interface LanguageContextType {
   setLanguage: (lang: Language, isManualChoice?: boolean) => void;
   t: (path: string, fallback?: string) => any;
   detectedInfo: GeoDetectionInfo | null;
-  showGeoToast: boolean;
-  dismissGeoToast: () => void;
   isDetecting: boolean;
   availableLanguages: LanguageOption[];
   redetectLanguage: () => Promise<void>;
@@ -28,24 +26,51 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const STORAGE_KEY = 'kinx_user_language_v1';
 const MANUAL_OVERRIDE_KEY = 'kinx_user_manual_lang_override';
 
+// Helper to determine initial language immediately before network calls
+const getInitialImmediateLanguage = (): Language => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY) as Language | null;
+    if (saved && ['vi', 'en', 'ja', 'zh'].includes(saved)) {
+      return saved;
+    }
+    // Check browser locale as instant first guess
+    if (typeof navigator !== 'undefined') {
+      const loc = (navigator.language || (navigator.languages && navigator.languages[0]) || '').toLowerCase();
+      if (loc.startsWith('vi')) return 'vi';
+      if (loc.startsWith('ja')) return 'ja';
+      if (loc.startsWith('zh')) return 'zh';
+      return 'en'; // Any other locale defaults to English immediately
+    }
+  } catch (e) {
+    // fallback
+  }
+  return 'en';
+};
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('vi');
+  const [language, setLanguageState] = useState<Language>(getInitialImmediateLanguage);
   const [detectedInfo, setDetectedInfo] = useState<GeoDetectionInfo | null>(null);
-  const [showGeoToast, setShowGeoToast] = useState<boolean>(false);
   const [isDetecting, setIsDetecting] = useState<boolean>(true);
 
-  // Helper to map country code or locale to supported language
+  // Helper to map country code to language
   const mapCountryToLang = (countryCode: string, localeStr?: string): Language => {
-    const code = countryCode ? countryCode.toUpperCase() : '';
+    const code = countryCode ? countryCode.toUpperCase().trim() : '';
+    
+    // Vietnam -> Vietnamese
     if (code === 'VN') return 'vi';
+    
+    // Japan -> Japanese
     if (code === 'JP') return 'ja';
-    if (['CN', 'TW', 'HK', 'MO', 'SG'].includes(code)) return 'zh';
+    
+    // China, Taiwan, Hong Kong, Macau -> Chinese
+    if (['CN', 'TW', 'HK', 'MO'].includes(code)) return 'zh';
 
-    if (code) {
-      // Any other country code (US, GB, FR, DE, KR, AU, CA, SG, etc.) defaults to English
+    // Any other country code (US, GB, FR, DE, KR, AU, CA, SG, etc.) -> English
+    if (code && code !== 'UNKNOWN') {
       return 'en';
     }
 
+    // If country is unknown, inspect browser locale
     if (localeStr) {
       const loc = localeStr.toLowerCase();
       if (loc.startsWith('vi')) return 'vi';
@@ -53,7 +78,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       if (loc.startsWith('zh')) return 'zh';
     }
 
-    // Default to English for international visitors
+    // Default international is English
     return 'en';
   };
 
@@ -68,10 +93,6 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     } catch (e) {
       // ignore localstorage error
     }
-  }, []);
-
-  const dismissGeoToast = useCallback(() => {
-    setShowGeoToast(false);
   }, []);
 
   // IP & Geolocation Detection
@@ -95,7 +116,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       let detectedCountryName = '';
       let source = '';
 
-      // 1. Try server-side /api/geo first
+      // 1. Try server-side /api/geo first (Fastest & most accurate behind Cloud Run / Proxies)
       try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 1800);
@@ -153,9 +174,10 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         }
       }
 
-      const navLang = navigator.language || (navigator.languages && navigator.languages[0]) || '';
+      const navLang = typeof navigator !== 'undefined' ? (navigator.language || (navigator.languages && navigator.languages[0]) || '') : '';
       const targetLang = mapCountryToLang(detectedCountry, navLang);
 
+      // Silently switch language right from the start
       setLanguageState(targetLang);
       document.documentElement.lang = targetLang;
       localStorage.setItem(STORAGE_KEY, targetLang);
@@ -171,13 +193,6 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         autoSwitched: true
       });
 
-      // Show toast if detected country is international or not Vietnamese
-      if (targetLang !== 'vi' || detectedCountry !== 'VN') {
-        setShowGeoToast(true);
-        setTimeout(() => {
-          setShowGeoToast(false);
-        }, 8000);
-      }
       setIsDetecting(false);
     } catch (err) {
       setIsDetecting(false);
@@ -232,10 +247,9 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         setLanguage,
         t,
         detectedInfo,
-        showGeoToast,
-        dismissGeoToast,
         isDetecting,
-        availableLanguages: LANGUAGES
+        availableLanguages: LANGUAGES,
+        redetectLanguage
       }}
     >
       {children}
