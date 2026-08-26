@@ -22,7 +22,7 @@ export const INITIAL_SECTIONS: SectionConfig[] = [
   { id: 'comparison', title: 'So Sánh Kinx Auto vs Cách Thủ Công', description: 'Bảng đối chiếu tốc độ, chi phí đầu tư, công sức và độ ổn định', enabled: true, order: 6 },
   { id: 'pricing', title: 'Bảng Giá & Các Gói Đăng Ký', description: 'Các gói Gói Cá Nhân Pro, Gói Team Pro 5 Máy, Gói 1 Năm Tiết Kiệm, Gói Doanh nghiệp', enabled: true, order: 7 },
   { id: 'testimonials', title: 'Đánh Giá & Case Study Triệu View', description: 'Review chân thực từ các admin kênh YouTube Automation & TikTok Affiliate', enabled: true, order: 8 },
-  { id: 'download-hub', title: 'Trung Tâm Tải Về & Cài Đặt (Windows/Mac)', description: 'Link tải trực tiếp bộ cài v4.5.6, hướng dẫn 3 bước cài đặt siêu nhanh', enabled: true, order: 9 },
+  { id: 'download-hub', title: 'Trung Tâm Tải Về & Cài Đặt (Windows/Mac)', description: 'Link tải trực tiếp bộ cài v4.5.8, hướng dẫn 3 bước cài đặt siêu nhanh', enabled: true, order: 9 },
   { id: 'faq', title: 'Câu Hỏi Thường Gặp (FAQ)', description: 'Giải đáp thắc mắc về cấu hình máy, đăng ký & nâng cấp gói, cập nhật tính năng', enabled: true, order: 10 },
 ];
 
@@ -601,7 +601,7 @@ export const KINX_MODULES: FeatureModule[] = [
     ],
     uiMockup: {
       title: 'Kinx Auto Hub & Settings',
-      subtitle: 'Phiên bản 4.5.6 - Zalo hỗ trợ: 0563.402.950',
+      subtitle: 'Phiên bản 4.5.8 - Zalo hỗ trợ: 0563.402.950',
       tabs: ['API Key Gemini', 'Ghép file', 'Hỗ trợ kỹ thuật'],
       activeTab: 'API Key Gemini',
       controlBar: {
@@ -620,7 +620,7 @@ export const KINX_MODULES: FeatureModule[] = [
     hotspots: [
       { id: 'h1', xPercent: 12, yPercent: 68, title: 'Menu Quản Lý API Key Gemini', description: 'Dán danh sách API key để phần mềm tự động điều phối không lo gián đoạn.', badge: 'Key Pool' },
       { id: 'h2', xPercent: 12, yPercent: 75, title: 'Kênh Hỗ Trợ 24/7 qua Zalo', description: 'Đội ngũ kỹ thuật hỗ trợ qua Ultraview và Zalo 0563.402.950.', badge: 'Support 24/7' },
-      { id: 'h3', xPercent: 12, yPercent: 88, title: 'Thông Tin Phiên Bản 4.5.6', description: 'Tự động cập nhật các thuật toán mới nhất của Veo và Edge TTS hoàn toàn miễn phí.', badge: 'Auto Update' }
+      { id: 'h3', xPercent: 12, yPercent: 88, title: 'Thông Tin Phiên Bản 4.5.8', description: 'Tự động cập nhật các thuật toán mới nhất của Veo và Edge TTS hoàn toàn miễn phí.', badge: 'Auto Update' }
     ],
     realImage: APP_IMAGES.videoFlow,
     imageCaption: 'Tự động tối ưu hoá tài nguyên hệ thống và hỗ trợ kỹ thuật Ultraview 24/7'
