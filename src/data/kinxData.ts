@@ -167,49 +167,49 @@ export const KINX_MODULES: FeatureModule[] = [
   },
   {
     id: 'voice-tts',
-    name: 'Tạo Voice AI (Edge TTS Đa Luồng)',
-    tagline: 'Chuyển văn bản thành giọng đọc truyền cảm siêu mượt - Miễn phí 100% không tốn token',
+    name: 'Tạo Voice AI (Edge TTS & Kinx TTS Clone Giọng Đa Luồng)',
+    tagline: 'Chuyển văn bản thành giọng đọc truyền cảm & Clone mọi giọng nói không giới hạn - Chạy đa luồng siêu tốc',
     category: 'core',
-    badge: 'KHÔNG TỐN TIỀN API',
+    badge: 'EDGE TTS & CLONE KHÔNG GIỚI HẠN',
     badgeColor: 'emerald',
     icon: 'Mic',
-    description: 'Tích hợp bộ chuyển giọng đọc tự nhiên Edge TTS chất lượng phòng thu. Hỗ trợ đầy đủ giọng tiếng Việt (Hoài My, Nam Minh...) và hơn 50 ngôn ngữ quốc tế. Tự động chia đoạn, chỉnh tốc độ, cao độ và xuất audio hàng loạt.',
+    description: 'Tích hợp sức mạnh kép vượt trội: Bộ chuyển giọng đọc Edge TTS miễn phí 100% không tốn token với 50+ ngôn ngữ quốc tế và Công nghệ Kinx TTS Clone giọng nói không giới hạn từ file mẫu audio bất kỳ. Hỗ trợ chạy đa luồng xuất hàng loạt file MP3 320kbps chuẩn phòng thu, giữ trọn ngữ điệu và cảm xúc chân thật.',
     highlights: [
-      'Giọng đọc truyền cảm tự nhiên, không bị giật hay máy móc',
-      'Đầy đủ giọng Bắc, Nam: HoaiMyNeural, NamMinhNeural...',
-      'Nhập từ file TXT kịch bản hàng nghìn từ chỉ 1 click',
-      'Chạy đa luồng xuất file MP3 chất lượng 320kbps siêu tốc'
+      'Edge TTS Đa Luồng: Đầy đủ giọng Bắc, Nam (Hoài My, Nam Minh...) & 50+ ngôn ngữ',
+      'Kinx TTS Voice Cloning: Nhân bản giọng nói bất kỳ từ file mẫu audio chỉ vài giây',
+      'Clone giọng không giới hạn số lượng giọng, xuất file chạy đa luồng tốc độ cao',
+      'Nhập từ file TXT kịch bản hàng nghìn từ, tự động cắt ghép audio chuẩn từng phân cảnh'
     ],
     metrics: [
-      { label: 'Chi phí Voice', value: '0 VNĐ' },
-      { label: 'Thời gian tạo audio', value: '1.5 Giây/câu' },
-      { label: 'Số ngôn ngữ', value: '50+ Tiếng' }
+      { label: 'Chi phí Voice & Clone', value: '0 VNĐ' },
+      { label: 'Tốc độ tạo audio', value: '1.5 Giây/câu' },
+      { label: 'Số lượng giọng Clone', value: 'Không giới hạn' }
     ],
     uiMockup: {
-      title: 'Tạo Voice',
-      subtitle: 'Chuyển văn bản thành giọng nói với Edge TTS',
-      tabs: ['Vietnamese - HoaiMyNeural', 'Tốc độ: Bình thường', 'Âm lượng: 100%'],
-      activeTab: 'Vietnamese - HoaiMyNeural',
+      title: 'Tạo Voice & Kinx TTS Clone',
+      subtitle: 'Chuyển văn bản thành giọng nói Edge TTS & Clone giọng không giới hạn đa luồng',
+      tabs: ['Edge TTS: Hoài My / Nam Minh', 'Kinx TTS: Clone Giọng Mẫu', 'Chạy Đa Luồng'],
+      activeTab: 'Edge TTS: Hoài My / Nam Minh',
       controlBar: {
-        model: 'Edge TTS High-Fidelity',
-        threads: 3,
+        model: 'Edge TTS & Kinx TTS Clone Multi-Thread',
+        threads: 5,
         ratio: 'MP3 Stereo 320kbps',
-        customInfo: 'Đã hoàn thành: 3/6 câu'
+        customInfo: 'Clone Voice: Sẵn sàng | Đa luồng: 5'
       },
       sampleContent: [
-        { id: 1, text: 'Phòng ngủ của Tom vào lúc nửa đêm, ánh trăng xanh nhạt chiếu qua cửa sổ...', voice: 'HoaiMy - Nữ', duration: '0:00 / 0:50', status: 'Done' },
-        { id: 2, text: 'Bên cạnh chiếc thùng rác trong con hẻm tối, Milo dùng răng kéo chiếc ba lô trẻ em...', voice: 'HoaiMy - Nữ', duration: '0:00 / 0:47', status: 'Done' },
-        { id: 3, text: 'Tom thò tay xuống đáy chiếc ba lô và lấy ra một chiếc chìa khóa bằng đồng cũ...', voice: 'HoaiMy - Nữ', duration: '0:00 / 0:45', status: 'Done' }
+        { id: 1, text: 'Phòng ngủ của Tom vào lúc nửa đêm, ánh trăng xanh nhạt chiếu qua cửa sổ...', voice: 'HoaiMy - Nữ (Edge)', duration: '0:00 / 0:50', status: 'Done' },
+        { id: 2, text: 'Bên cạnh chiếc thùng rác trong con hẻm tối, Milo dùng răng kéo chiếc ba lô trẻ em...', voice: 'Reviewer Pro (Kinx Clone)', duration: '0:00 / 0:47', status: 'Done' },
+        { id: 3, text: 'Tom thò tay xuống đáy chiếc ba lô và lấy ra một chiếc chìa khóa bằng đồng cũ...', voice: 'Kể Chuyện (Kinx Clone)', duration: '0:00 / 0:45', status: 'Done' }
       ]
     },
     hotspots: [
-      { id: 'h1', xPercent: 26, yPercent: 22, title: 'Chọn Giọng Đọc & Ngôn Ngữ', description: 'Lựa chọn giọng đọc Hoài My (Nữ nhẹ nhàng), Nam Minh (Nam trầm ấm) chuẩn phát thanh viên.', badge: 'Neural TTS' },
-      { id: 'h2', xPercent: 52, yPercent: 22, title: 'Tốc Độ, Cao Độ & Số Luồng', description: 'Tùy chỉnh tốc độ đọc, cao độ âm thanh và chạy đa luồng xuất âm thanh siêu tốc.', badge: 'Audio Settings' },
-      { id: 'h3', xPercent: 78, yPercent: 22, title: 'Nút Nhập File TXT & Chạy Hàng Loạt', description: 'Tự động cắt kịch bản dài thành các đoạn audio tương ứng từng phân cảnh video.', badge: 'Batch TTS' },
-      { id: 'h4', xPercent: 28, yPercent: 65, title: 'Thanh Nghe Thử & Danh Sách Câu Đọc', description: 'Kiểm tra ngữ điệu, ngắt nghỉ từng câu trước khi render sang video.', badge: 'Audio Player' }
+      { id: 'h1', xPercent: 26, yPercent: 22, title: 'Chọn Giọng Đọc & Ngôn Ngữ Edge TTS', description: 'Lựa chọn giọng đọc Hoài My (Nữ nhẹ nhàng), Nam Minh (Nam trầm ấm) chuẩn phát thanh viên cùng 50+ ngôn ngữ.', badge: 'Neural TTS' },
+      { id: 'h2', xPercent: 52, yPercent: 22, title: 'Kinx TTS Voice Cloning Không Giới Hạn', description: 'Nạp file audio mẫu vài giây để nhân bản/clone giọng đọc bất kỳ, không giới hạn số lượng giọng clone.', badge: 'Unlimited Clone' },
+      { id: 'h3', xPercent: 78, yPercent: 22, title: 'Xuất Audio Đa Luồng Siêu Tốc', description: 'Chạy song song 1 - 10 luồng xuất hàng loạt file MP3 320kbps tương ứng từng phân cảnh kịch bản.', badge: 'Multi-Thread 320k' },
+      { id: 'h4', xPercent: 28, yPercent: 65, title: 'Thanh Nghe Thử & Danh Sách Phân Đoạn', description: 'Kiểm tra ngữ điệu, ngắt nghỉ từng câu trước khi render video hoàn chỉnh.', badge: 'Audio Player' }
     ],
     realImage: APP_IMAGES.voiceTts,
-    imageCaption: 'Giao diện tính năng Tạo Voice Edge TTS miễn phí đa luồng, hỗ trợ giọng Hoài My, Nam Minh'
+    imageCaption: 'Giao diện tính năng Tạo Voice Edge TTS và Kinx TTS Clone giọng nói không giới hạn chạy đa luồng siêu tốc'
   },
   {
     id: 'ai-script-generator',

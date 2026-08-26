@@ -52,10 +52,10 @@ const COMPARISON_DATA_BY_LANG: Record<Language, LocalizedComparisonRow[]> = {
       otherAi: 'Bị giới hạn credit / token đắt đỏ',
     },
     {
-      feature: 'Giọng đọc Voice AI (Edge TTS)',
-      kinx: 'Miễn phí trọn đời (Hoài My, Nam Minh...)',
-      manual: 'Phải tự thu âm hoặc thuê voice',
-      otherAi: 'Tính phí theo từng ký tự (ElevenLabs)',
+      feature: 'Giọng đọc Voice AI & Clone Giọng (Edge TTS & Kinx TTS)',
+      kinx: 'Miễn phí trọn đời (Edge TTS 50+ thứ tiếng & Kinx TTS Clone giọng không giới hạn)',
+      manual: 'Phải tự thu âm hoặc thuê voice đắt đỏ',
+      otherAi: 'Tính phí theo từng ký tự (ElevenLabs rất đắt)',
     },
     {
       feature: 'Bóc tách kịch bản từ link YouTube',
@@ -96,10 +96,10 @@ const COMPARISON_DATA_BY_LANG: Record<Language, LocalizedComparisonRow[]> = {
       otherAi: 'Strict limits with costly tokens',
     },
     {
-      feature: 'Studio Voiceover AI (Edge TTS)',
-      kinx: 'Free Lifetime (50+ Languages & Accents)',
-      manual: 'Manual recording / Hiring voice actor',
-      otherAi: 'Priced per character (ElevenLabs)',
+      feature: 'Studio Voiceover AI & Unlimited Voice Clone (Edge & Kinx TTS)',
+      kinx: 'Free Lifetime (50+ Neural Languages & Unlimited Custom Voice Cloning)',
+      manual: 'Manual recording / Hiring expensive voice actors',
+      otherAi: 'Priced per character & costly limits (ElevenLabs)',
     },
     {
       feature: 'Script Extraction from YouTube Link',
@@ -140,10 +140,10 @@ const COMPARISON_DATA_BY_LANG: Record<Language, LocalizedComparisonRow[]> = {
       otherAi: 'クレジット従量課金が高額',
     },
     {
-      feature: '高品質AI音声合成 (Edge TTS)',
-      kinx: '永久無料（日本語・多言語対応）',
-      manual: 'ナレーター依頼または自作録音',
-      otherAi: '文字数単位の従量課金',
+      feature: '高品質AI音声合成＆無制限ボイスクローン (Edge & Kinx TTS)',
+      kinx: '永久無料（日本語・50言語＆サンプル音声からの無制限声クローン）',
+      manual: 'ナレーター依頼または自作録音（高コスト）',
+      otherAi: '文字数単位の従量課金・高額（ElevenLabs等）',
     },
     {
       feature: 'YouTubeリンクからの台本自動抽出',
@@ -184,10 +184,10 @@ const COMPARISON_DATA_BY_LANG: Record<Language, LocalizedComparisonRow[]> = {
       otherAi: '严格限制 Token / 点数收费昂贵',
     },
     {
-      feature: 'AI 拟真人声配音 (Edge TTS)',
-      kinx: '终身免费（支持中文各地方言及50+语种）',
-      manual: '需自行录音或雇佣配音员',
-      otherAi: '按字数计费（成本极高）',
+      feature: 'AI 拟真配音与无限声音克隆 (Edge TTS & Kinx TTS)',
+      kinx: '终身免费（支持中文各地方言、50+语种及样本声音无限克隆）',
+      manual: '需自行录音或雇佣配音员（耗时且昂贵）',
+      otherAi: '按字数计费，克隆收费极高（如 ElevenLabs）',
     },
     {
       feature: '一键提取 YouTube 视频文案',
@@ -276,13 +276,13 @@ export const getLocalizedGalleryItems = (lang: Language): LocalizedGalleryItem[]
       },
       {
         id: 'voice-tts',
-        title: 'Free Edge TTS Voice Studio',
+        title: 'Voice AI Studio (Edge & Kinx Voice Clone)',
         category: 'audio_script',
         categoryLabel: 'Voice & Scripts',
         imageUrl: USER_ATTACHMENT_IMAGES.voiceTts,
-        badge: 'Zero API Cost',
-        description: 'Multi-threaded neural voiceover studio without API fees. Supports 50+ languages, natural pitch, and batch audio cuts.',
-        highlights: ['Export 320kbps studio-quality MP3', 'Auto-split long scripts by video scenes', 'Unlimited character generation lifetime'],
+        badge: 'Edge TTS & Unlimited Clone',
+        description: 'Multi-threaded neural voice studio with Edge TTS zero API cost and Kinx TTS unlimited voice cloning from any audio sample.',
+        highlights: ['Export 320kbps studio-quality MP3', 'Clone any custom voice without limits', 'Multi-threaded batch processing with 50+ languages'],
         moduleLink: 'voice-tts'
       },
       {
@@ -413,13 +413,13 @@ export const getLocalizedGalleryItems = (lang: Language): LocalizedGalleryItem[]
       },
       {
         id: 'voice-tts',
-        title: '無料 Edge TTS 音声スタジオ',
+        title: 'AI音声合成＆無制限ボイスクローン (Edge & Kinx TTS)',
         category: 'audio_script',
         categoryLabel: '音声・台本',
         imageUrl: USER_ATTACHMENT_IMAGES.voiceTts,
-        badge: 'API料金 0円',
-        description: 'APIコスト不要のマルチスレッド自然音声スタジオ。日本語（Nanami, Keitaなど）および50言語以上に対応。',
-        highlights: ['320kbps スタジオ品質 MP3 出力', 'シーンごとに台本を自動分割', '文字数制限なしで永久無料'],
+        badge: 'Edge TTS & 無制限クローン',
+        description: 'APIコスト不要のマルチスレッド自然音声スタジオ＆サンプル音声からの無制限ボイスクローン。日本語・50言語以上対応。',
+        highlights: ['320kbps スタジオ品質 MP3 出力', 'サンプルから無制限に声を複製・クローン', 'マルチスレッド並列処理で高速出力'],
         moduleLink: 'voice-tts'
       },
       {
@@ -550,13 +550,13 @@ export const getLocalizedGalleryItems = (lang: Language): LocalizedGalleryItem[]
       },
       {
         id: 'voice-tts',
-        title: '免费 Edge TTS 拟真配音台',
+        title: '免费 Edge TTS 拟真配音与 Kinx 无限声音克隆',
         category: 'audio_script',
         categoryLabel: '配音与文案',
         imageUrl: USER_ATTACHMENT_IMAGES.voiceTts,
-        badge: '0 API 费用',
-        description: '无需昂贵API成本的多线程神经网络配音棚，支持中文多地方言（普通话、粤语、川话等）及50+外语。',
-        highlights: ['输出 320kbps 录音室级 MP3 音频', '智能根据视频分镜自动切段', '终身免费不限字数生成'],
+        badge: 'Edge TTS & 无限声音克隆',
+        description: '无需昂贵API费用的多线程配音与声音克隆棚，支持中文多地方言、50+外语及任意样本声音无限克隆。',
+        highlights: ['输出 320kbps 录音室级 MP3 音频', '支持任意样本音频无限克隆声线', '多线程并发极速批量导出'],
         moduleLink: 'voice-tts'
       },
       {
@@ -687,13 +687,13 @@ export const getLocalizedGalleryItems = (lang: Language): LocalizedGalleryItem[]
     },
     {
       id: 'voice-tts',
-      title: 'Tạo Voice Edge TTS Miễn Phí',
+      title: 'Tạo Voice AI (Edge TTS & Kinx TTS Clone Giọng Đa Luồng)',
       category: 'audio_script',
       categoryLabel: 'Voice & Kịch Bản',
       imageUrl: USER_ATTACHMENT_IMAGES.voiceTts,
-      badge: 'Edge TTS 0 VNĐ',
-      description: 'Studio lồng tiếng AI đa luồng không tốn chi phí API, hỗ trợ các giọng đọc truyền cảm Hoài My, Nam Minh với tùy biến cao.',
-      highlights: ['Xuất âm thanh MP3 320kbps phòng thu', 'Tự động cắt nhỏ kịch bản theo phân cảnh', 'Miễn phí trọn đời không giới hạn ký tự'],
+      badge: 'Edge TTS & Clone Không Giới Hạn',
+      description: 'Studio lồng tiếng AI đa luồng không tốn chi phí API, hỗ trợ giọng Edge TTS truyền cảm Hoài My, Nam Minh và công nghệ Kinx TTS Clone mọi giọng nói không giới hạn từ file audio mẫu.',
+      highlights: ['Xuất âm thanh MP3 320kbps phòng thu', 'Clone giọng nói mẫu không giới hạn số lượng', 'Chạy đa luồng siêu tốc không tốn token'],
       moduleLink: 'voice-tts'
     },
     {
@@ -1295,14 +1295,14 @@ export const getLocalizedModules = (lang: Language): FeatureModule[] => {
           ]
         },
         'voice-tts': {
-          name: 'AI Voiceover (Edge TTS Multi-Thread)',
-          tagline: 'Lifelike studio narration - 100% free with zero API token cost',
-          description: 'Integrated studio-quality neural Edge TTS engine. Supports English, Japanese, Chinese, Vietnamese, and over 50 international languages with speed and pitch control.',
+          name: 'AI Voiceover & Unlimited Voice Cloning (Edge & Kinx TTS)',
+          tagline: 'Lifelike studio narration & unlimited voice cloning - Multi-threaded with zero API costs',
+          description: 'Integrated studio-quality Edge TTS engine with 50+ languages combined with Kinx TTS unlimited voice cloning from any audio sample. Batch export high-fidelity 320kbps MP3s simultaneously.',
           highlights: [
             'Natural, expressive neural voiceover without robotic pauses',
-            'Over 50+ languages with multiple male/female accents',
-            'Import long multi-thousand-word scripts in one click',
-            'Multi-threaded batch 320kbps MP3 audio rendering'
+            'Unlimited custom voice cloning from short audio reference files',
+            'Over 50+ international languages with multi-thread parallel rendering',
+            'Import long multi-thousand-word scripts with automatic scene splitting'
           ]
         },
         'ai-script-generator': {
@@ -1443,13 +1443,13 @@ export const getLocalizedModules = (lang: Language): FeatureModule[] => {
           ]
         },
         'voice-tts': {
-          name: 'AI音声合成 (Edge TTS マルチスレッド)',
-          tagline: '自然で滑らかなアナウンサー品質のナレーション - API費用0円で無制限',
-          description: 'スタジオ品質のEdge TTSエンジンを内蔵。日本語、英語、中国語、ベトナム語など50言語以上の高品質音声を自由に出力。',
+          name: 'AI音声合成＆無制限ボイスクローン (Edge & Kinx TTS)',
+          tagline: '滑らかなナレーション＆サンプル音声からの無制限ボイスクローン - マルチスレッド並列処理',
+          description: 'スタジオ品質のEdge TTS（50言語以上）とKinx TTS無制限ボイスクローン技術を完全統合。音声サンプルから任意の声を忠実に複製し、高音質MP3をマルチスレッドで一括生成。',
           highlights: [
-            '機械的でない自然な抑揚と滑らかな発音',
+            '機械的でない自然な抑揚と滑らかなアナウンサー品質発音',
+            'わずか数秒のサンプル音声から無制限にカスタムボイスをクローン',
             '日本語（Nanami, Keita等）を含む50言語以上の多言語音声',
-            '数千文字の長文台本もワンクリックで自動分割出力',
             '320kbps 高音質 MP3 のマルチスレッド一括出力'
           ]
         },
@@ -1591,13 +1591,13 @@ export const getLocalizedModules = (lang: Language): FeatureModule[] => {
           ]
         },
         'voice-tts': {
-          name: 'AI 拟真配音 (Edge TTS 多线程)',
-          tagline: '专业播音员级拟真发音 - 终身免费，无需消耗任何 API Token',
-          description: '集成录音室级神经网络 Edge TTS 引擎。全面支持中文各地方言、英语、日语、越南语等 50+ 种国际语言，音调语速随心调控。',
+          name: 'AI 拟真配音与无限制声音克隆 (Edge TTS & Kinx TTS)',
+          tagline: '专业播音员级拟真发音与任意声音无限克隆 - 多线程并发，零 API 额外成本',
+          description: '强强联手：不仅拥有覆盖中文方言及 50+ 语言的终身免费 Edge TTS 引擎，更深度搭载 Kinx TTS 无限声音克隆技术，只需几秒音频样本即可复制专属声音，多线程并发高速导出。',
           highlights: [
             '发音自然流畅、富含情感，告别机械卡顿感',
-            '涵盖 50+ 语言及各地区男女声线',
-            '支持一键导入数万字长篇剧本文本自动切段',
+            '支持上传任意样本音频，不限数量克隆专属声音',
+            '涵盖 50+ 国际语言及各地区男女声线',
             '多线程并发极速导出 320kbps 广播级 MP3 音频'
           ]
         },

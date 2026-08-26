@@ -166,20 +166,34 @@ async function startServer() {
       const ratePercent = Math.round((speedNum - 1.0) * 100);
       const rateStr = ratePercent >= 0 ? `+${ratePercent}%` : `${ratePercent}%`;
 
-      // Supported Microsoft Neural Voices for vi, en, ja, zh
-      const allowedVoices = [
-        "vi-VN-HoaiMyNeural",
-        "vi-VN-NamMinhNeural",
-        "en-US-JennyNeural",
-        "en-US-GuyNeural",
-        "en-US-AriaNeural",
-        "ja-JP-NanamiNeural",
-        "ja-JP-KeitaNeural",
-        "zh-CN-XiaoxiaoNeural",
-        "zh-CN-YunxiNeural",
-        "zh-TW-HsiaoChenNeural"
-      ];
-      const chosenVoice = allowedVoices.includes(voice) ? voice : "vi-VN-HoaiMyNeural";
+      // Supported Neural Voices & Kinx TTS Voice Clone Presets
+      const voiceMapping: Record<string, { voice: string; pitch: string; rateOffset: number }> = {
+        // Edge TTS Neural Standard
+        "vi-VN-HoaiMyNeural": { voice: "vi-VN-HoaiMyNeural", pitch: "+0Hz", rateOffset: 0 },
+        "vi-VN-NamMinhNeural": { voice: "vi-VN-NamMinhNeural", pitch: "+0Hz", rateOffset: 0 },
+        "en-US-JennyNeural": { voice: "en-US-JennyNeural", pitch: "+0Hz", rateOffset: 0 },
+        "en-US-GuyNeural": { voice: "en-US-GuyNeural", pitch: "+0Hz", rateOffset: 0 },
+        "en-US-AriaNeural": { voice: "en-US-AriaNeural", pitch: "+0Hz", rateOffset: 0 },
+        "ja-JP-NanamiNeural": { voice: "ja-JP-NanamiNeural", pitch: "+0Hz", rateOffset: 0 },
+        "ja-JP-KeitaNeural": { voice: "ja-JP-KeitaNeural", pitch: "+0Hz", rateOffset: 0 },
+        "zh-CN-XiaoxiaoNeural": { voice: "zh-CN-XiaoxiaoNeural", pitch: "+0Hz", rateOffset: 0 },
+        "zh-CN-YunxiNeural": { voice: "zh-CN-YunxiNeural", pitch: "+0Hz", rateOffset: 0 },
+        "zh-TW-HsiaoChenNeural": { voice: "zh-TW-HsiaoChenNeural", pitch: "+0Hz", rateOffset: 0 },
+        // Kinx TTS Unlimited Voice Clone Presets
+        "kinx-clone-reviewer-male": { voice: "vi-VN-NamMinhNeural", pitch: "+2Hz", rateOffset: 5 },
+        "kinx-clone-story-female": { voice: "vi-VN-HoaiMyNeural", pitch: "-2Hz", rateOffset: -5 },
+        "kinx-clone-us-influencer": { voice: "en-US-JennyNeural", pitch: "+3Hz", rateOffset: 5 },
+        "kinx-clone-cinema-deep": { voice: "en-US-GuyNeural", pitch: "-4Hz", rateOffset: -5 },
+        "kinx-clone-anime-heroine": { voice: "ja-JP-NanamiNeural", pitch: "+3Hz", rateOffset: 5 },
+        "kinx-clone-news-pro": { voice: "ja-JP-KeitaNeural", pitch: "-2Hz", rateOffset: 0 },
+        "kinx-clone-zh-topkol": { voice: "zh-CN-XiaoxiaoNeural", pitch: "+2Hz", rateOffset: 5 },
+        "kinx-clone-zh-documentary": { voice: "zh-CN-YunxiNeural", pitch: "-3Hz", rateOffset: -5 },
+      };
+
+      const selectedConfig = voiceMapping[voice] || { voice: "vi-VN-HoaiMyNeural", pitch: "+0Hz", rateOffset: 0 };
+      const chosenVoice = selectedConfig.voice;
+      const combinedRatePercent = Math.max(-50, Math.min(100, ratePercent + selectedConfig.rateOffset));
+      const finalRateStr = combinedRatePercent >= 0 ? `+${combinedRatePercent}%` : `${combinedRatePercent}%`;
 
       const tts = new MsEdgeTTS({ enableLogger: false });
       await tts.setMetadata(chosenVoice, OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3);
@@ -189,8 +203,8 @@ async function startServer() {
       fs.mkdirSync(subDir, { recursive: true });
 
       const result = await tts.toFile(subDir, cleanText, {
-        rate: rateStr,
-        pitch: "+0Hz",
+        rate: finalRateStr,
+        pitch: selectedConfig.pitch || "+0Hz",
         volume: "+0%"
       });
 

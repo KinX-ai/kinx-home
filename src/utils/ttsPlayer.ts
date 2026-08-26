@@ -9,10 +9,12 @@ export interface TTSVoiceOption {
   style: string;
   pitch: number;
   rate: number;
+  engine?: 'edge' | 'kinx-clone';
+  badge?: string;
 }
 
 export const TTS_VOICES: TTSVoiceOption[] = [
-  // Vietnamese
+  // Vietnamese - Edge TTS Standard
   {
     id: 'vi-VN-HoaiMyNeural',
     name: 'Hoài My (Nữ Bắc)',
@@ -22,6 +24,8 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: 'Truyền cảm • Kể chuyện • Review phim',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0đ',
   },
   {
     id: 'vi-VN-NamMinhNeural',
@@ -32,8 +36,36 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: 'Trầm ấm • Lịch sử • Phim tài liệu',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0đ',
   },
-  // English
+  // Vietnamese - Kinx TTS Voice Clone
+  {
+    id: 'kinx-clone-reviewer-male',
+    name: 'Kinx Clone: Reviewer Triệu View (Nam)',
+    lang: 'vi',
+    gender: 'male',
+    accent: 'Giọng Mẫu Clone',
+    style: 'Tự nhiên • Bán hàng TikTok • Clone từ audio mẫu',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+  {
+    id: 'kinx-clone-story-female',
+    name: 'Kinx Clone: Kể Chuyện Cảm Xúc (Nữ)',
+    lang: 'vi',
+    gender: 'female',
+    accent: 'Giọng Mẫu Clone',
+    style: 'Trầm lắng • Bí ẩn trinh thám • Không giới hạn',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+
+  // English - Edge TTS Standard
   {
     id: 'en-US-JennyNeural',
     name: 'Jenny (US Female)',
@@ -43,6 +75,8 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: 'Dynamic • Storytelling • Tech Review',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0đ',
   },
   {
     id: 'en-US-GuyNeural',
@@ -53,8 +87,36 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: 'Cinematic Trailer • Deep Narration',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0đ',
   },
-  // Japanese
+  // English - Kinx TTS Voice Clone
+  {
+    id: 'kinx-clone-us-influencer',
+    name: 'Kinx Clone: Viral Creator Pro',
+    lang: 'en',
+    gender: 'female',
+    accent: 'Cloned Studio Voice',
+    style: 'Energetic • TikTok / Reels • Unlimited Clone',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+  {
+    id: 'kinx-clone-cinema-deep',
+    name: 'Kinx Clone: Hollywood Deep Voice',
+    lang: 'en',
+    gender: 'male',
+    accent: 'Cloned Studio Voice',
+    style: 'Cinematic • Deep Bass Movie Trailer',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+
+  // Japanese - Edge TTS Standard
   {
     id: 'ja-JP-NanamiNeural',
     name: 'Nanami (女性)',
@@ -64,6 +126,8 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: '明瞭・解説・アニメストーリー',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0円',
   },
   {
     id: 'ja-JP-KeitaNeural',
@@ -74,8 +138,36 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: '重厚・ドキュメンタリー・映画解説',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0円',
   },
-  // Chinese
+  // Japanese - Kinx TTS Voice Clone
+  {
+    id: 'kinx-clone-anime-heroine',
+    name: 'Kinx Clone: アニメヒロイン (女性)',
+    lang: 'ja',
+    gender: 'female',
+    accent: 'クローン音声サンプル',
+    style: '感情豊か・Webtoonナレーション・無制限',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+  {
+    id: 'kinx-clone-news-pro',
+    name: 'Kinx Clone: 報道プロナレーター (男性)',
+    lang: 'ja',
+    gender: 'male',
+    accent: 'クローン音声サンプル',
+    style: '説得力・ドキュメンタリー・高音質',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+
+  // Chinese - Edge TTS Standard
   {
     id: 'zh-CN-XiaoxiaoNeural',
     name: '晓晓 (女声)',
@@ -85,6 +177,8 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: '生动自然 • 电影解说 • 带货口播',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0元',
   },
   {
     id: 'zh-CN-YunxiNeural',
@@ -95,6 +189,33 @@ export const TTS_VOICES: TTSVoiceOption[] = [
     style: '深沉磁性 • 历史传奇 • 纪录片',
     pitch: 1.0,
     rate: 1.0,
+    engine: 'edge',
+    badge: 'Edge TTS 0元',
+  },
+  // Chinese - Kinx TTS Voice Clone
+  {
+    id: 'kinx-clone-zh-topkol',
+    name: 'Kinx Clone: 头部带货主播 (女声)',
+    lang: 'zh',
+    gender: 'female',
+    accent: '样本克隆音色',
+    style: '高转化口播 • 热情感染力 • 无限克隆',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
+  },
+  {
+    id: 'kinx-clone-zh-documentary',
+    name: 'Kinx Clone: 影视解说老白 (男声)',
+    lang: 'zh',
+    gender: 'male',
+    accent: '样本克隆音色',
+    style: '悬疑磁性 • 电影解说专业音色',
+    pitch: 1.0,
+    rate: 1.0,
+    engine: 'kinx-clone',
+    badge: 'Kinx Voice Clone',
   },
 ];
 

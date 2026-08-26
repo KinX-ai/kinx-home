@@ -31,15 +31,15 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
     },
     // Hero Section
     hero: {
-      badge: 'Công Nghệ AI Veo 3.1 & Edge TTS 2026',
+      badge: 'Công Nghệ AI Veo 3.1 & Edge TTS / Kinx Voice Clone 2026',
       titleHighlight1: 'Phần Mềm Tự Động Hóa',
       titleHighlight2: 'Sáng Tạo Video AI',
       titleHighlight3: 'Hàng Loạt',
-      subtitle: 'Sản xuất hàng trăm video mỗi ngày cho YouTube Shorts, TikTok & Reels. Tích hợp công nghệ Veo 3.1, khóa nhân vật đồng nhất 100%, lồng tiếng Edge TTS 0đ và tự động phân tích kịch bản thông minh.',
+      subtitle: 'Sản xuất hàng trăm video mỗi ngày cho YouTube Shorts, TikTok & Reels. Tích hợp công nghệ Veo 3.1, khóa nhân vật đồng nhất 100%, lồng tiếng Edge TTS & Clone mọi giọng nói không giới hạn 0đ và tự động phân tích kịch bản thông minh.',
       featureChips: {
         veo: 'Veo 3.1 Đa Luồng',
         character: 'Khóa Nhân Vật Đồng Nhất',
-        edgeTts: 'Edge TTS Voice 0đ',
+        edgeTts: 'Edge TTS & Clone Voice 0đ',
         youtube: 'Phân Tích Kịch Bản'
       },
       stats: {
@@ -66,8 +66,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
       step1Desc: 'Dán link YouTube hoặc gõ 1 câu ý tưởng',
       step2Title: 'AI Viết Kịch Bản',
       step2Desc: 'Tự động phân cảnh 3 hồi chuẩn chỉnh',
-      step3Title: 'Lồng Tiếng Voice AI',
-      step3Desc: 'Giọng đọc Edge TTS chuẩn phát thanh viên',
+      step3Title: 'Voice AI & Clone Giọng',
+      step3Desc: 'Edge TTS & Kinx Clone giọng không giới hạn',
       step4Title: 'Render Veo 3.1',
       step4Desc: 'Khóa nhân vật & xuất video 1080p',
       steps: {
@@ -78,8 +78,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
         },
         step2: {
           number: '02',
-          name: 'Khóa Nhân Vật & Chọn Voice',
-          desc: 'Giữ khuôn mặt nhân vật đồng nhất 100% qua tất cả các scene và ghép giọng đọc tự nhiên.'
+          name: 'Khóa Nhân Vật & Chọn Voice / Clone Giọng',
+          desc: 'Giữ khuôn mặt nhân vật đồng nhất 100% qua tất cả các scene và ghép giọng đọc tự nhiên hoặc clone giọng mẫu.'
         },
         step3: {
           number: '03',
@@ -230,15 +230,15 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
     },
     // Hero Section
     hero: {
-      badge: 'Google Veo 3.1 & Neural TTS Engine 2026',
+      badge: 'Google Veo 3.1 & Edge TTS / Kinx Voice Clone Engine 2026',
       titleHighlight1: 'Automated Batch',
       titleHighlight2: 'AI Video Creation',
       titleHighlight3: 'Software',
-      subtitle: 'Batch produce hundreds of high-retention videos daily for YouTube Shorts, TikTok & Reels. Built with Veo 3.1 technology, 100% consistent character locking, unlimited neural voiceover, and smart script analysis.',
+      subtitle: 'Batch produce hundreds of high-retention videos daily for YouTube Shorts, TikTok & Reels. Built with Veo 3.1 technology, 100% consistent character locking, unlimited Edge TTS neural voiceover & Kinx TTS voice cloning, and smart script analysis.',
       featureChips: {
         veo: 'Veo 3.1 Multi-threading',
         character: '100% Consistent Character',
-        edgeTts: 'Zero-Cost Neural TTS',
+        edgeTts: 'Edge TTS & Voice Clone 0$',
         youtube: 'Viral Script Analyzer'
       },
       stats: {
@@ -265,8 +265,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
       step1Desc: 'Paste public YouTube link or enter creative prompt',
       step2Title: 'AI Script Writing',
       step2Desc: 'Automatic 3-act structured scene breakdown',
-      step3Title: 'Neural Voiceover',
-      step3Desc: 'Studio-grade natural Edge TTS narration',
+      step3Title: 'Voice AI & Voice Clone',
+      step3Desc: 'Edge TTS & Unlimited Kinx Voice Cloning',
       step4Title: 'Render Veo 3.1',
       step4Desc: 'Face-lock character & export 1080p video',
       steps: {
@@ -277,8 +277,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
         },
         step2: {
           number: '02',
-          name: 'Lock Character & Voice',
-          desc: 'Maintain 100% character facial consistency across all scenes with natural multilingual voices.'
+          name: 'Lock Character & Choose Voice / Clone',
+          desc: 'Maintain 100% character facial consistency across all scenes with natural multilingual voices or custom cloned voices.'
         },
         step3: {
           number: '03',
@@ -429,15 +429,15 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
     },
     // Hero Section
     hero: {
-      badge: 'Google Veo 3.1 ＆ ニューラル音声エンジン 2026',
+      badge: 'Google Veo 3.1 ＆ Edge TTS / Kinx ボイスクローン 2026',
       titleHighlight1: '一括自動化',
       titleHighlight2: 'AI動画制作',
       titleHighlight3: 'ソフトウェア',
-      subtitle: 'YouTube Shorts、TikTok、Reels向けの動画を毎日数百本一括作成。Google Veo 3.1エンジン、100%同一キャラクター保持機能、無制限ニューラル音声合成、スマート台本解析を完全統合。',
+      subtitle: 'YouTube Shorts、TikTok、Reels向けの動画を毎日数百本一括作成。Google Veo 3.1エンジン、100%同一キャラクター保持機能、無制限ニューラル音声合成＆無制限ボイスクローン、スマート台本解析を完全統合。',
       featureChips: {
         veo: 'Veo 3.1 マルチスレッド',
         character: '同一キャラ100%保持',
-        edgeTts: '追加費用0円 音声合成',
+        edgeTts: 'Edge TTS ＆ 声クローン 0円',
         youtube: '人気動画の台本分析'
       },
       stats: {
@@ -464,8 +464,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
       step1Desc: 'YouTubeリンクを貼るか、プロンプトを入力',
       step2Title: 'AI台本・構成作成',
       step2Desc: '3幕構成のシーン別スクリプトを自動生成',
-      step3Title: '音声ナレーション合成',
-      step3Desc: 'スタジオ品質の高音質ニューラル音声',
+      step3Title: '音声AI ＆ ボイスクローン',
+      step3Desc: 'Edge TTS ＆ Kinx 無制限ボイスクローン',
       step4Title: 'Veo 3.1 レンダリング',
       step4Desc: 'キャラ固定＆1080p高精細動画を出力',
       steps: {
@@ -476,8 +476,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
         },
         step2: {
           number: '02',
-          name: 'キャラ固定＆音声選択',
-          desc: 'すべてのカットで顔と服装の整合性を100%保持し、自然な高品質ナレーションを付与。'
+          name: 'キャラ固定＆音声・クローン選択',
+          desc: 'すべてのカットで顔と服装の整合性を100%保持し、自然な音声またはクローン音声を付与。'
         },
         step3: {
           number: '03',
@@ -628,15 +628,15 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
     },
     // Hero Section
     hero: {
-      badge: 'Google Veo 3.1 与 神经网络语音引擎 2026',
+      badge: 'Google Veo 3.1 与 Edge TTS / Kinx 声音克隆引擎 2026',
       titleHighlight1: '批量自动化',
       titleHighlight2: 'AI视频创作',
       titleHighlight3: '软件',
-      subtitle: '每天批量生成数百条爆款视频，专为 YouTube Shorts、TikTok 和 Reels 设计。集成 Google Veo 3.1、100%角色一致性锁定、零成本Edge TTS配音及智能爆款文案解析。',
+      subtitle: '每天批量生成数百条爆款视频，专为 YouTube Shorts、TikTok 和 Reels 设计。集成 Google Veo 3.1、100%角色一致性锁定、零成本Edge TTS配音与Kinx TTS无限声音克隆、智能爆款文案解析。',
       featureChips: {
         veo: 'Veo 3.1 多线程并发',
         character: '100%角色面部一致性',
-        edgeTts: '免费高品质语音合成',
+        edgeTts: 'Edge TTS 与 声音克隆 0元',
         youtube: '爆款视频文案提取'
       },
       stats: {
@@ -663,8 +663,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
       step1Desc: '粘贴公开视频链接或输入一句话文案',
       step2Title: 'AI智能剧本创作',
       step2Desc: '标准三幕式分镜提示词自动拆解',
-      step3Title: '自然语音旁白配音',
-      step3Desc: '广播级 Edge TTS 多语种解说配音',
+      step3Title: 'Voice AI 拟真配音与声音克隆',
+      step3Desc: 'Edge TTS 与 Kinx 无限制声音克隆',
       step4Title: 'Veo 3.1 多线程渲染',
       step4Desc: '锁定人物面孔并导出 1080p 超清视频',
       steps: {
@@ -675,8 +675,8 @@ export const TRANSLATIONS: Record<Language, Record<string, any>> = {
         },
         step2: {
           number: '02',
-          name: '锁定人物与配音选择',
-          desc: '在所有分镜镜头中100%保持人物五官一致，并搭配逼真的多语种解说配音。'
+          name: '锁定人物与配音/克隆选择',
+          desc: '在所有分镜镜头中100%保持人物五官一致，并搭配逼真的多语种解说或定制克隆声线。'
         },
         step3: {
           number: '03',
