@@ -13,10 +13,15 @@ import {
   Mic,
   ShoppingBag,
   Eye,
-  Sparkles
+  Sparkles,
+  Play,
+  Square,
+  Volume2
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getLocalizedGalleryItems, GalleryItem } from '../data/localizedKinxData';
+import { AUDIO_SAMPLES } from '../data/images';
+import { playSampleAudioUrl, stopAllTTS } from '../utils/ttsPlayer';
 
 interface SoftwareGalleryProps {
   onSelectFeatureTab?: (featureId: string) => void;
@@ -32,6 +37,23 @@ export const SoftwareGallery: React.FC<SoftwareGalleryProps> = ({
   const galleryItems = getLocalizedGalleryItems(language);
   const [activeCategory, setActiveCategory] = useState<'all' | 'video' | 'character' | 'audio_script' | 'marketing'>('all');
   const [selectedLightboxIndex, setSelectedLightboxIndex] = useState<number | null>(null);
+  const [isPlayingGalleryAudio, setIsPlayingGalleryAudio] = useState<boolean>(false);
+
+  const handleToggleGalleryAudio = () => {
+    if (isPlayingGalleryAudio) {
+      stopAllTTS();
+      setIsPlayingGalleryAudio(false);
+    } else {
+      stopAllTTS();
+      setIsPlayingGalleryAudio(true);
+      playSampleAudioUrl({
+        audioUrl: AUDIO_SAMPLES.dialogueConversation,
+        onStart: () => setIsPlayingGalleryAudio(true),
+        onEnd: () => setIsPlayingGalleryAudio(false),
+        onError: () => setIsPlayingGalleryAudio(false),
+      });
+    }
+  };
 
   const uiTexts = {
     vi: {
@@ -254,7 +276,7 @@ export const SoftwareGallery: React.FC<SoftwareGalleryProps> = ({
                     </p>
 
                     {/* Quick bullet points */}
-                    <div className="space-y-1.5 mb-5">
+                    <div className="space-y-1.5 mb-3">
                       {item.highlights.slice(0, 2).map((hl, i) => (
                         <div key={i} className="flex items-center gap-2 text-xs text-slate-300">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -262,6 +284,34 @@ export const SoftwareGallery: React.FC<SoftwareGalleryProps> = ({
                         </div>
                       ))}
                     </div>
+
+                    {/* Special Audio Preview for Voice TTS in Gallery Card */}
+                    {item.id === 'voice-tts' && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleToggleGalleryAudio();
+                        }}
+                        className={`w-full mb-3 py-1.5 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2 border transition-all cursor-pointer ${
+                          isPlayingGalleryAudio
+                            ? 'bg-rose-600/30 text-rose-300 border-rose-500/50 animate-pulse'
+                            : 'bg-purple-950/60 text-purple-300 border-purple-500/40 hover:bg-purple-900/60'
+                        }`}
+                      >
+                        {isPlayingGalleryAudio ? (
+                          <>
+                            <Square className="w-3.5 h-3.5 fill-current" />
+                            <span>Dừng nghe hội thoại</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3.5 h-3.5 fill-current" />
+                            <span>Nghe thử Voice Hội thoại mẫu (.wav)</span>
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
 
                   {/* Action Buttons */}
@@ -383,7 +433,21 @@ export const SoftwareGallery: React.FC<SoftwareGalleryProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 w-full sm:w-auto shrink-0 justify-end">
+                <div className="flex items-center gap-2 w-full sm:w-auto shrink-0 justify-end flex-wrap">
+                  {activeItem.id === 'voice-tts' && (
+                    <button
+                      type="button"
+                      onClick={handleToggleGalleryAudio}
+                      className={`px-4 py-2.5 rounded-xl text-xs font-bold shadow-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                        isPlayingGalleryAudio
+                          ? 'bg-rose-600 hover:bg-rose-500 text-white animate-pulse'
+                          : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white'
+                      }`}
+                    >
+                      {isPlayingGalleryAudio ? <Square className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+                      <span>{isPlayingGalleryAudio ? 'Dừng audio' : 'Nghe Thử Voice Hội Thoại (.wav)'}</span>
+                    </button>
+                  )}
                   {activeItem.moduleLink && onSelectFeatureTab && (
                     <button
                       onClick={() => {

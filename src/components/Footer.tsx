@@ -11,7 +11,9 @@ import {
   Lock,
   FileText,
   AlertTriangle,
-  Ban
+  Ban,
+  Mic,
+  ShieldAlert
 } from 'lucide-react';
 import { APP_IMAGES } from '../data/images';
 import { APP_LINKS } from '../data/kinxData';
@@ -21,7 +23,7 @@ import { LanguageSelector } from './LanguageSelector';
 interface FooterProps {
   onScrollToDownload: () => void;
   onOpenLeadModal: () => void;
-  onOpenLegalModal: (tab?: 'disclaimer' | 'refund' | 'compliance' | 'privacy' | 'terms') => void;
+  onOpenLegalModal: (tab?: 'disclaimer' | 'refund' | 'compliance' | 'voice_compliance' | 'privacy' | 'terms') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
@@ -314,6 +316,15 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2 text-slate-400">
               <li>
                 <button
+                  onClick={() => onOpenLegalModal('voice_compliance')}
+                  className="text-left text-amber-300 hover:text-amber-200 font-semibold transition-colors flex items-center gap-1.5 group"
+                >
+                  <Mic className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span className="group-hover:underline">{t('footer.voiceCompliance', 'Miễn Trừ AI Voice & Clone')}</span>
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onOpenLegalModal('disclaimer')}
                   className="text-left hover:text-purple-300 transition-colors flex items-center gap-1.5 group"
                 >
@@ -359,10 +370,10 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li className="pt-1">
                 <button
-                  onClick={() => onOpenLegalModal('disclaimer')}
-                  className="w-full py-1.5 px-2.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-purple-300 border border-purple-500/20 text-[11px] font-semibold text-center hover:border-purple-500/40 transition-all flex items-center justify-center gap-1.5"
+                  onClick={() => onOpenLegalModal('voice_compliance')}
+                  className="w-full py-1.5 px-2.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-semibold text-center hover:border-amber-500/50 transition-all flex items-center justify-center gap-1.5"
                 >
-                  <Scale className="w-3 h-3 text-purple-400" />
+                  <ShieldAlert className="w-3 h-3 text-amber-400" />
                   <span>{t('footer.viewAllLegal', 'Xem Toàn Bộ Văn Bản Pháp Lý')}</span>
                 </button>
               </li>
@@ -375,10 +386,17 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="flex items-start gap-2.5">
             <Scale className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              {t('footer.legalNoticeText', 'Kinx Auto là phần mềm công cụ kỹ thuật số hỗ trợ sáng tạo video AI. Người dùng được dùng thử miễn phí trước khi mua; Kinx Auto áp dụng chính sách không hoàn tiền sau khi bản quyền đã được kích hoạt, đồng thời cam kết bảo hành kỹ thuật 1-kèm-1 qua Ultraview và tuân thủ Luật An ninh mạng Việt Nam.')}
+              {t('footer.legalNoticeText', 'Kinx Auto là phần mềm công cụ kỹ thuật số hỗ trợ sáng tạo video AI. Nghiêm cấm sử dụng AI Voice Cloning vào mục đích giả mạo, lừa đảo hoặc vi phạm pháp luật. Người dùng được dùng thử miễn phí trước khi mua; Kinx Auto áp dụng chính sách không hoàn tiền sau khi bản quyền đã được kích hoạt, đồng thời cam kết bảo hành kỹ thuật 1-kèm-1 qua Ultraview và tuân thủ Luật An ninh mạng Việt Nam.')}
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+            <button
+              onClick={() => onOpenLegalModal('voice_compliance')}
+              className="px-3 py-1.5 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border border-amber-500/30 font-semibold transition-colors flex items-center gap-1 text-[11px]"
+            >
+              <Mic className="w-3 h-3 text-amber-400" />
+              <span>{t('footer.voiceCompliance', 'Miễn Trừ AI Voice')}</span>
+            </button>
             <button
               onClick={() => onOpenLegalModal('refund')}
               className="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 font-semibold transition-colors flex items-center gap-1 text-[11px]"
@@ -399,6 +417,14 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
           <p>{t('footer.copyright', '© 2026 Kinx Auto (kinxauto.click). Bản quyền thuộc về Kinx Auto Team. Zalo Kỹ Thuật: 0563.402.950.')}</p>
           <div className="flex items-center flex-wrap gap-3 sm:gap-4">
+            <button
+              onClick={() => onOpenLegalModal('voice_compliance')}
+              className="text-amber-400 hover:text-amber-300 transition-colors underline underline-offset-2 flex items-center gap-1"
+            >
+              <Mic className="w-3 h-3 text-amber-400" />
+              <span>{t('footer.voiceCompliance', 'Miễn Trừ AI Voice & Clone')}</span>
+            </button>
+            <span>•</span>
             <button
               onClick={() => onOpenLegalModal('refund')}
               className="text-rose-300/90 hover:text-rose-200 transition-colors underline underline-offset-2 flex items-center gap-1"

@@ -20,18 +20,24 @@ import {
   Download,
   Info,
   ChevronRight,
-  Square
+  Square,
+  ShieldAlert,
+  AlertTriangle,
+  Scale
 } from 'lucide-react';
 import { FeatureModule, HotspotTag } from '../types';
-import { speakEdgeTTS, stopAllTTS } from '../utils/ttsPlayer';
+import { speakEdgeTTS, playSampleAudioUrl, stopAllTTS } from '../utils/ttsPlayer';
+import { AUDIO_SAMPLES } from '../data/images';
 import { useLanguage } from '../i18n/LanguageContext';
 import { getLocalizedModules } from '../data/localizedKinxData';
+import { LegalTabType } from './LegalDisclaimerModal';
 
 interface FeatureDeepDiveProps {
   activeModuleId: string;
   onSelectModule: (id: string) => void;
   onOpenLeadModal: () => void;
   onScrollToDownload: () => void;
+  onOpenLegalModal?: (tab?: LegalTabType) => void;
 }
 
 export const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({
@@ -39,15 +45,44 @@ export const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({
   onSelectModule,
   onOpenLeadModal,
   onScrollToDownload,
+  onOpenLegalModal,
 }) => {
   const { language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeHotspot, setActiveHotspot] = useState<HotspotTag | null>(null);
   const [viewMode, setViewMode] = useState<'image' | 'simulator'>('image');
   const [playingItemText, setPlayingItemText] = useState<string | null>(null);
+  const [isPlayingSampleWav, setIsPlayingSampleWav] = useState<boolean>(false);
+  const [sampleWavTime, setSampleWavTime] = useState<number>(0);
+  const [sampleWavDuration, setSampleWavDuration] = useState<number>(0);
 
   const localizedModules = getLocalizedModules(language);
   const currentModule = localizedModules.find((m) => m.id === activeModuleId) || localizedModules[0];
+
+  const handleToggleSampleWav = () => {
+    if (isPlayingSampleWav) {
+      stopAllTTS();
+      setIsPlayingSampleWav(false);
+      return;
+    }
+
+    stopAllTTS();
+    setPlayingItemText(null);
+    setIsPlayingSampleWav(true);
+    playSampleAudioUrl({
+      audioUrl: AUDIO_SAMPLES.dialogueConversation,
+      onStart: () => setIsPlayingSampleWav(true),
+      onEnd: () => {
+        setIsPlayingSampleWav(false);
+        setSampleWavTime(0);
+      },
+      onError: () => setIsPlayingSampleWav(false),
+      onTimeUpdate: (curr, dur) => {
+        setSampleWavTime(curr);
+        if (dur && dur > 0) setSampleWavDuration(dur);
+      },
+    });
+  };
 
   const handleToggleVoicePreview = (textToSpeak: string) => {
     if (playingItemText === textToSpeak) {
@@ -57,6 +92,7 @@ export const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({
     }
 
     stopAllTTS();
+    setIsPlayingSampleWav(false);
     setPlayingItemText(textToSpeak);
     const voiceByLang: Record<string, string> = {
       vi: 'vi-VN-HoaiMyNeural',
@@ -356,6 +392,29 @@ export const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({
                 ))}
               </div>
 
+              {/* Special Legal Compliance Card for Voice TTS & Voice Cloning */}
+              {currentModule.id === 'voice-tts' && (
+                <div className="mt-5 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs space-y-2">
+                  <div className="flex items-center gap-2 text-amber-300 font-bold">
+                    <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>Miễn Trừ Trách Nhiệm Pháp Lý Voice Cloning:</span>
+                  </div>
+                  <p className="text-slate-300 leading-relaxed text-[11px]">
+                    Nghiêm cấm tuyệt đối sử dụng AI Clone giọng nói để giả mạo danh tính, lừa đảo tài chính hoặc vi phạm bản quyền khi chưa có sự đồng ý bằng văn bản của chính chủ giọng nói. Người dùng tự chịu 100% trách nhiệm trước pháp luật.
+                  </p>
+                  {onOpenLegalModal && (
+                    <button
+                      type="button"
+                      onClick={() => onOpenLegalModal('voice_compliance')}
+                      className="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2 flex items-center gap-1 text-[11px] cursor-pointer"
+                    >
+                      <Scale className="w-3 h-3" />
+                      <span>Xem chi tiết văn bản miễn trừ pháp lý AI Voice →</span>
+                    </button>
+                  )}
+                </div>
+              )}
+
               {/* Metrics */}
               <div className="mt-6 pt-6 border-t border-slate-800 grid grid-cols-3 gap-3 text-center">
                 {currentModule.metrics.map((metric, idx) => (
@@ -586,6 +645,69 @@ export const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({
                       </div>
                     )}
                   </div>
+
+                  {/* Special Live Dialogue Audio Sample Player for Voice Module */}
+                  {currentModule.id === 'voice-tts' && (
+                    <div className="mb-4 p-3.5 rounded-xl bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-500/40 shadow-lg">
+                      <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                        <span className="flex items-center gap-1.5 text-xs font-bold text-purple-200">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Mẫu Voice Hội Thoại Đa Dạng Tiếng Nói Thực Tế (kinxts_conv.wav)</span>
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">
+                          320kbps WAV
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={handleToggleSampleWav}
+                          className={`px-3 py-2 rounded-lg font-bold text-xs flex items-center gap-1.5 transition-all shadow cursor-pointer ${
+                            isPlayingSampleWav
+                              ? 'bg-rose-600 hover:bg-rose-500 text-white animate-pulse'
+                              : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white'
+                          }`}
+                        >
+                          {isPlayingSampleWav ? (
+                            <>
+                              <Square className="w-3.5 h-3.5 fill-current" />
+                              <span>Dừng nghe</span>
+                            </>
+                          ) : (
+                            <>
+                              <Play className="w-3.5 h-3.5 fill-current" />
+                              <span>Nghe thử hội thoại mẫu (0:15)</span>
+                            </>
+                          )}
+                        </button>
+
+                        <div className="flex-1 hidden sm:flex items-center gap-1.5 h-6">
+                          {[30, 70, 45, 90, 60, 100, 40, 80, 55, 95, 75, 50, 85, 60, 40].map((h, i) => (
+                            <span
+                              key={i}
+                              style={{
+                                height: isPlayingSampleWav ? `${Math.max(20, (h * (Math.sin(i + sampleWavTime * 4) + 1.2)) / 2.2)}%` : '25%',
+                                transition: 'height 0.15s ease',
+                              }}
+                              className={`flex-1 rounded-sm ${isPlayingSampleWav ? 'bg-purple-400' : 'bg-slate-700'}`}
+                            />
+                          ))}
+                        </div>
+
+                        <a
+                          href={AUDIO_SAMPLES.dialogueConversation}
+                          download="kinxts_conv_sample.wav"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs border border-slate-700 flex items-center gap-1"
+                        >
+                          <Download className="w-3.5 h-3.5 text-cyan-400" />
+                          <span className="hidden sm:inline">Tải file .wav</span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Specific Screen Simulated Content */}
                   <div className="space-y-3">

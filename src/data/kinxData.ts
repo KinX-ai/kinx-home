@@ -17,13 +17,14 @@ export const INITIAL_SECTIONS: SectionConfig[] = [
   { id: 'stats-bar', title: 'Chỉ Số Ấn Tượng & Đối Tác', description: 'Số liệu 15.000+ người dùng, 1.2M+ video render, đối tác nền tảng', enabled: true, order: 1 },
   { id: 'interactive-flow', title: 'Quy Trình Tạo Video Tự Động 1-Click', description: 'Mô phỏng trực quan từ Ý tưởng -> Kịch bản -> Voice -> Prompt -> Video', enabled: true, order: 2 },
   { id: 'features-deepdive', title: '12 Vũ Khí Đột Phá Của Kinx Auto', description: 'Trình khám phá chi tiết 12 module kèm thẻ chú thích tính năng trực tiếp', enabled: true, order: 3 },
-  { id: 'software-gallery', title: 'Album Ảnh Giao Diện & Tính Năng Thực Tế', description: 'Thư viện ảnh chụp toàn bộ 12 chức năng của phần mềm với chế độ phóng to Lightbox', enabled: true, order: 4 },
-  { id: 'roi-calculator', title: 'Bảng Tính Hiệu Suất & Tiết Kiệm Chi Phí', description: 'Công cụ tính toán số giờ và số tiền tiết kiệm mỗi tháng', enabled: true, order: 5 },
-  { id: 'comparison', title: 'So Sánh Kinx Auto vs Cách Thủ Công', description: 'Bảng đối chiếu tốc độ, chi phí đầu tư, công sức và độ ổn định', enabled: true, order: 6 },
-  { id: 'pricing', title: 'Bảng Giá & Các Gói Đăng Ký', description: 'Các gói Gói Cá Nhân Pro, Gói Team Pro 5 Máy, Gói 1 Năm Tiết Kiệm, Gói Doanh nghiệp', enabled: true, order: 7 },
-  { id: 'testimonials', title: 'Đánh Giá & Case Study Triệu View', description: 'Review chân thực từ các admin kênh YouTube Automation & TikTok Affiliate', enabled: true, order: 8 },
-  { id: 'download-hub', title: 'Trung Tâm Tải Về & Cài Đặt (Windows/Mac)', description: 'Link tải trực tiếp bộ cài v4.5.8, hướng dẫn 3 bước cài đặt siêu nhanh', enabled: true, order: 9 },
-  { id: 'faq', title: 'Câu Hỏi Thường Gặp (FAQ)', description: 'Giải đáp thắc mắc về cấu hình máy, đăng ký & nâng cấp gói, cập nhật tính năng', enabled: true, order: 10 },
+  { id: 'dialogue-showcase', title: 'Tính Năng Mới: Voice Hội Thoại Đa Dạng Tiếng Nói & Nghe Thử Audio', description: 'Trình diễn tạo voice hội thoại phân vai nhiều nhân vật và nghe audio mẫu .wav trực tiếp', enabled: true, order: 4 },
+  { id: 'software-gallery', title: 'Album Ảnh Giao Diện & Tính Năng Thực Tế', description: 'Thư viện ảnh chụp toàn bộ 12 chức năng của phần mềm với chế độ phóng to Lightbox', enabled: true, order: 5 },
+  { id: 'roi-calculator', title: 'Bảng Tính Hiệu Suất & Tiết Kiệm Chi Phí', description: 'Công cụ tính toán số giờ và số tiền tiết kiệm mỗi tháng', enabled: true, order: 6 },
+  { id: 'comparison', title: 'So Sánh Kinx Auto vs Cách Thủ Công', description: 'Bảng đối chiếu tốc độ, chi phí đầu tư, công sức và độ ổn định', enabled: true, order: 7 },
+  { id: 'pricing', title: 'Bảng Giá & Các Gói Đăng Ký', description: 'Các gói Gói Cá Nhân Pro, Gói Team Pro 5 Máy, Gói 1 Năm Tiết Kiệm, Gói Doanh nghiệp', enabled: true, order: 8 },
+  { id: 'testimonials', title: 'Đánh Giá & Case Study Triệu View', description: 'Review chân thực từ các admin kênh YouTube Automation & TikTok Affiliate', enabled: true, order: 9 },
+  { id: 'download-hub', title: 'Trung Tâm Tải Về & Cài Đặt (Windows/Mac)', description: 'Link tải trực tiếp bộ cài v4.5.8, hướng dẫn 3 bước cài đặt siêu nhanh', enabled: true, order: 10 },
+  { id: 'faq', title: 'Câu Hỏi Thường Gặp (FAQ)', description: 'Giải đáp thắc mắc về cấu hình máy, đăng ký & nâng cấp gói, cập nhật tính năng', enabled: true, order: 11 },
 ];
 
 export const KINX_MODULES: FeatureModule[] = [
@@ -167,49 +168,49 @@ export const KINX_MODULES: FeatureModule[] = [
   },
   {
     id: 'voice-tts',
-    name: 'Tạo Voice AI (Edge TTS & Kinx TTS Clone Giọng Đa Luồng)',
-    tagline: 'Chuyển văn bản thành giọng đọc truyền cảm & Clone mọi giọng nói không giới hạn - Chạy đa luồng siêu tốc',
+    name: 'Tạo Voice AI, Voice Hội Thoại Đa Dạng Tiếng Nói & Clone Giọng Đa Luồng',
+    tagline: 'Chuyển văn bản thành giọng đọc truyền cảm, tạo hội thoại đối đáp đa nhân vật & Clone mọi giọng nói không giới hạn',
     category: 'core',
-    badge: 'EDGE TTS & CLONE KHÔNG GIỚI HẠN',
+    badge: 'MỚI: VOICE HỘI THOẠI & CLONE KHÔNG GIỚI HẠN',
     badgeColor: 'emerald',
     icon: 'Mic',
-    description: 'Tích hợp sức mạnh kép vượt trội: Bộ chuyển giọng đọc Edge TTS miễn phí 100% không tốn token với 50+ ngôn ngữ quốc tế và Công nghệ Kinx TTS Clone giọng nói không giới hạn từ file mẫu audio bất kỳ. Hỗ trợ chạy đa luồng xuất hàng loạt file MP3 320kbps chuẩn phòng thu, giữ trọn ngữ điệu và cảm xúc chân thật.',
+    description: 'Tích hợp bộ 3 công nghệ âm thanh AI đỉnh cao: (1) Tạo Voice Hội Thoại Đa Dạng Tiếng Nói phân vai nhiều nhân vật trong 1 kịch bản, (2) Bộ chuyển giọng đọc Edge TTS miễn phí 100% không tốn token với 50+ ngôn ngữ quốc tế, và (3) Công nghệ Kinx TTS Clone giọng nói không giới hạn từ file mẫu audio bất kỳ. Hỗ trợ chạy đa luồng xuất hàng loạt file MP3/WAV 320kbps chuẩn phòng thu, ghép nối đối đáp mượt mà không bị ngắt quãng.',
     highlights: [
-      'Edge TTS Đa Luồng: Đầy đủ giọng Bắc, Nam (Hoài My, Nam Minh...) & 50+ ngôn ngữ',
-      'Kinx TTS Voice Cloning: Nhân bản giọng nói bất kỳ từ file mẫu audio chỉ vài giây',
-      'Clone giọng không giới hạn số lượng giọng, xuất file chạy đa luồng tốc độ cao',
-      'Nhập từ file TXT kịch bản hàng nghìn từ, tự động cắt ghép audio chuẩn từng phân cảnh'
+      'MỚI: Tạo Voice Hội thoại phân vai MC, Khách mời, Nhân vật A/B trong cùng 1 kịch bản',
+      'Edge TTS Đa Luồng: Đầy đủ giọng Bắc, Nam (Hoài My, Nam Minh...) & 50+ ngôn ngữ quốc tế',
+      'Kinx TTS Voice Cloning: Nhân bản giọng nói bất kỳ từ file mẫu audio chỉ vài giây không giới hạn',
+      'Tự động ghép nối phân đoạn đối thoại chuẩn từng mili-giây, xuất MP3/WAV 320kbps phòng thu'
     ],
     metrics: [
       { label: 'Chi phí Voice & Clone', value: '0 VNĐ' },
       { label: 'Tốc độ tạo audio', value: '1.5 Giây/câu' },
-      { label: 'Số lượng giọng Clone', value: 'Không giới hạn' }
+      { label: 'Số nhân vật hội thoại', value: 'Đa nhân vật / Kịch bản' }
     ],
     uiMockup: {
-      title: 'Tạo Voice & Kinx TTS Clone',
-      subtitle: 'Chuyển văn bản thành giọng nói Edge TTS & Clone giọng không giới hạn đa luồng',
-      tabs: ['Edge TTS: Hoài My / Nam Minh', 'Kinx TTS: Clone Giọng Mẫu', 'Chạy Đa Luồng'],
-      activeTab: 'Edge TTS: Hoài My / Nam Minh',
+      title: 'Tạo Voice & Hội Thoại Kinx TTS Multi-Speaker',
+      subtitle: 'Tạo voice hội thoại đa dạng tiếng nói, Edge TTS & Clone giọng không giới hạn đa luồng',
+      tabs: ['Voice Hội Thoại Đa Dạng Tiếng Nói', 'Edge TTS: Hoài My / Nam Minh', 'Kinx TTS: Clone Giọng Mẫu', 'Chạy Đa Luồng'],
+      activeTab: 'Voice Hội Thoại Đa Dạng Tiếng Nói',
       controlBar: {
-        model: 'Edge TTS & Kinx TTS Clone Multi-Thread',
+        model: 'Multi-Speaker Dialogue & Kinx TTS Clone',
         threads: 5,
-        ratio: 'MP3 Stereo 320kbps',
-        customInfo: 'Clone Voice: Sẵn sàng | Đa luồng: 5'
+        ratio: 'MP3/WAV Stereo 320kbps',
+        customInfo: 'Hội Thoại Đa Giọng: Sẵn sàng | Đa luồng: 5'
       },
       sampleContent: [
-        { id: 1, text: 'Phòng ngủ của Tom vào lúc nửa đêm, ánh trăng xanh nhạt chiếu qua cửa sổ...', voice: 'HoaiMy - Nữ (Edge)', duration: '0:00 / 0:50', status: 'Done' },
-        { id: 2, text: 'Bên cạnh chiếc thùng rác trong con hẻm tối, Milo dùng răng kéo chiếc ba lô trẻ em...', voice: 'Reviewer Pro (Kinx Clone)', duration: '0:00 / 0:47', status: 'Done' },
-        { id: 3, text: 'Tom thò tay xuống đáy chiếc ba lô và lấy ra một chiếc chìa khóa bằng đồng cũ...', voice: 'Kể Chuyện (Kinx Clone)', duration: '0:00 / 0:45', status: 'Done' }
+        { id: 1, text: 'Chào mừng các bạn đã đến với kênh chia sẻ kiến thức công nghệ AI Kinx Auto!', voice: 'Nhân vật 1: Nam Minh (MC)', duration: '0:00 / 0:04', status: 'Khớp 100%' },
+        { id: 2, text: 'Hôm nay chúng ta sẽ cùng trải nghiệm tính năng tạo Voice Hội thoại đa giọng nói hoàn toàn mới.', voice: 'Nhân vật 2: Hoài My (Khách mời)', duration: '0:04 / 0:09', status: 'Khớp 100%' },
+        { id: 3, text: 'Đặc biệt là hệ thống tự động gán giọng từng nhân vật và xuất file ghép nối chuẩn từng mili-giây!', voice: 'Nhân vật 3: Kinx Clone Studio', duration: '0:09 / 0:15', status: 'Khớp 100%' }
       ]
     },
     hotspots: [
-      { id: 'h1', xPercent: 26, yPercent: 22, title: 'Chọn Giọng Đọc & Ngôn Ngữ Edge TTS', description: 'Lựa chọn giọng đọc Hoài My (Nữ nhẹ nhàng), Nam Minh (Nam trầm ấm) chuẩn phát thanh viên cùng 50+ ngôn ngữ.', badge: 'Neural TTS' },
+      { id: 'h1', xPercent: 26, yPercent: 22, title: 'Phân Vai Kịch Bản & Gán Giọng Từng Nhân Vật', description: 'Gán giọng đọc khác nhau cho từng dòng thoại của MC, Khách mời hoặc nhân vật trong kịch bản.', badge: 'Multi-Speaker' },
       { id: 'h2', xPercent: 52, yPercent: 22, title: 'Kinx TTS Voice Cloning Không Giới Hạn', description: 'Nạp file audio mẫu vài giây để nhân bản/clone giọng đọc bất kỳ, không giới hạn số lượng giọng clone.', badge: 'Unlimited Clone' },
-      { id: 'h3', xPercent: 78, yPercent: 22, title: 'Xuất Audio Đa Luồng Siêu Tốc', description: 'Chạy song song 1 - 10 luồng xuất hàng loạt file MP3 320kbps tương ứng từng phân cảnh kịch bản.', badge: 'Multi-Thread 320k' },
-      { id: 'h4', xPercent: 28, yPercent: 65, title: 'Thanh Nghe Thử & Danh Sách Phân Đoạn', description: 'Kiểm tra ngữ điệu, ngắt nghỉ từng câu trước khi render video hoàn chỉnh.', badge: 'Audio Player' }
+      { id: 'h3', xPercent: 78, yPercent: 22, title: 'Xuất Audio Hội Thoại Đa Luồng Siêu Tốc', description: 'Chạy song song 1 - 10 luồng xuất hàng loạt file MP3 320kbps tự động ghép nối mượt mà.', badge: 'Multi-Thread 320k' },
+      { id: 'h4', xPercent: 28, yPercent: 65, title: 'Thanh Nghe Thử Trực Tiếp File Xuất Bản (.wav)', description: 'Tích hợp trình nghe thử audio hội thoại thực tế trước khi xuất bản video hoàn chỉnh.', badge: 'Live WAV Preview' }
     ],
-    realImage: APP_IMAGES.voiceTts,
-    imageCaption: 'Giao diện tính năng Tạo Voice Edge TTS và Kinx TTS Clone giọng nói không giới hạn chạy đa luồng siêu tốc'
+    realImage: APP_IMAGES.voiceDialogue,
+    imageCaption: 'Giao diện tính năng Tạo Voice Hội Thoại Đa Dạng Tiếng Nói & Kinx TTS Clone giọng nói không giới hạn chạy đa luồng siêu tốc'
   },
   {
     id: 'ai-script-generator',
@@ -631,82 +632,97 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     id: 'personal-pro',
     name: 'Gói Cá Nhân Pro',
-    targetAudience: 'Gói chuyên nghiệp với đầy đủ tính năng và hiệu suất cao.',
+    targetAudience: 'Gói chuyên nghiệp đầy đủ 12 module vũ khí tự động hóa và hiệu suất cao.',
     priceFormatted: '550.000 đ',
     billingPeriod: '/ tháng',
-    subHighlight: 'Không cần tài khoản Veo 3',
+    subHighlight: 'Không cần tài khoản Veo 3 - Tiết kiệm chi phí',
     popular: false,
     features: [
-      'Tạo không giới hạn video Veo 3 Text to Video/ Video từ Ảnh /Video Đồng nhất',
-      'Tạo không giới hạn Ảnh/Whisk/Nano',
-      'Tải video 720p/1080p',
-      'Số luồng lên đến 20 Luồng',
-      'Tất cả các chức năng tools'
+      'Tạo không giới hạn video Veo 3 / Veo 3.1 Text to Video, Video từ Ảnh & NV Đồng nhất 100%',
+      'Trọn bộ giọng đọc AI: Giọng Adam, Ngọc Huyền, Hoài My, Nam Minh... truyền cảm chuẩn phòng thu',
+      'Công nghệ Kinx TTS Clone giọng nói KHÔNG GIỚI HẠN từ file audio mẫu bất kỳ',
+      'Tạo không giới hạn Ảnh Pro / Nano Banana / Whisk đa luồng chất lượng cao',
+      'Tải video 720p / 1080p Full HD siêu nét không logo / watermark',
+      'Tự động tạo kịch bản AI 3 hồi, phân tích link YouTube & sinh prompt điện ảnh',
+      'Mở rộng video dài liền mạch, tạo thumbnail giật tít & làm video TMĐT KOL',
+      'Tốc độ xử lý đa luồng lên đến 20 Luồng chạy song song',
+      'Mở khóa toàn bộ 12 Module chức năng tools độc quyền của Kinx Auto',
+      'Hỗ trợ kỹ thuật 1-kèm-1 qua Ultraview / Zalo 24/7 & Cập nhật v4.5.8+ miễn phí'
     ],
-    ctaText: 'Chọn gói',
+    ctaText: 'Chọn Gói Này',
     ctaType: 'secondary'
   },
   {
     id: 'team-pro-5',
     name: 'Gói Team Pro/5 Máy',
-    targetAudience: 'Gói mở rộng 5 máy cùng lúc cho Team.',
+    targetAudience: 'Gói mở rộng 5 máy cùng lúc cho Team MMO, Studio & Agency.',
     originalPrice: '2.750.000 đ',
     priceFormatted: '1.900.000 đ',
     billingPeriod: '/ tháng',
-    subHighlight: 'Không cần tài khoản Veo 3',
+    subHighlight: 'Không cần tài khoản Veo 3 - Dùng đồng thời 5 máy',
     popular: false,
     features: [
-      'Tạo không giới hạn video Veo 3 Text to Video/ Video từ Ảnh /Video Đồng nhất',
-      'Tạo không giới hạn Ảnh/Whisk/Nano',
-      'Tải video 720p/1080p',
-      'Số luồng lên đến 20 Luồng',
-      'Tất cả các chức năng tools',
-      'Sử dụng số lượng 5 máy cùng lúc.'
+      'Tạo không giới hạn video Veo 3 / Veo 3.1 & Khóa nhân vật đồng nhất 100%',
+      'Trọn bộ giọng đọc AI: Giọng Adam, Ngọc Huyền, Hoài My, Nam Minh & 50+ ngôn ngữ',
+      'Công nghệ Clone giọng nói KHÔNG GIỚI HẠN số lượng giọng cho cả 5 máy',
+      'Tạo không giới hạn Ảnh Pro / Nano Banana / Whisk đa luồng',
+      'Tải video 720p / 1080p Full HD không giới hạn số lượng video/tháng',
+      'Mở khóa trọn bộ 12 Module tools (Kịch bản AI, YouTube Parser, Video TMĐT KOL...)',
+      'Sử dụng đồng thời 5 máy tính cùng lúc với hiệu suất tối đa',
+      'Số luồng lên đến 20 Luồng song song mỗi máy',
+      'Quản lý API Key Gemini thông minh tự động xoay vòng không lo gián đoạn',
+      'Hỗ trợ cài đặt và tối ưu quy trình cho toàn bộ 5 máy qua Ultraview 24/7'
     ],
-    ctaText: 'Chọn gói',
+    ctaText: 'Chọn Gói Team',
     ctaType: 'secondary'
   },
   {
     id: 'year-pro-1',
     name: 'Gói 1 Năm Pro/1 Máy',
-    targetAudience: 'Lựa chọn tiết kiệm nhất cho người dùng lâu dài.',
+    targetAudience: 'Lựa chọn tiết kiệm và tối ưu nhất cho nhà sáng tạo nội dung lâu dài.',
     originalPrice: '6.600.000 đ',
     priceFormatted: '5.950.000 đ',
     billingPeriod: '/ năm',
-    subHighlight: 'Không cần tài khoản Veo 3',
+    subHighlight: 'Không cần tài khoản Veo 3 - Tiết kiệm 650.000 đ',
     badge: 'TIẾT KIỆM NHẤT',
     popular: true,
     features: [
-      'Tạo không giới hạn video Veo 3 Text to Video/ Video từ Ảnh /Video Đồng nhất',
-      'Tạo không giới hạn Ảnh/Whisk/Nano',
-      'Tải video 720p/1080p',
-      'Số luồng lên đến 20 Luồng',
-      'Tất cả các chức năng tools'
+      'Tạo không giới hạn video Veo 3 / Veo 3.1 & Khóa nhân vật đồng nhất 100% trong 12 tháng',
+      'Mở khóa VIP trọn bộ giọng đọc AI Adam, Ngọc Huyền, Hoài My, Nam Minh...',
+      'Công nghệ Clone giọng nói KHÔNG GIỚI HẠN từ bất kỳ file audio nào',
+      'Tạo không giới hạn Ảnh Pro / Nano Banana / Whisk đa luồng',
+      'Tải video 720p / 1080p Full HD siêu nét, ưu tiên băng thông render nhanh nhất',
+      'Tự động tạo kịch bản AI, bóc tách YouTube, mở rộng video dài & TMĐT KOL',
+      'Số luồng lên đến 20 Luồng xử lý mượt mà không giật lag',
+      'Mở khóa toàn bộ 12 Module tools và tự động cập nhật miễn phí mọi phiên bản v4.5.8+',
+      'Tiết kiệm hơn 650.000đ so với gia hạn từng tháng',
+      'Hỗ trợ kỹ thuật VIP 1-kèm-1 qua Ultraview / Zalo 24/7'
     ],
-    ctaText: 'Chọn gói',
+    ctaText: 'Chọn Gói 1 Năm',
     ctaType: 'primary'
   },
   {
     id: 'enterprise',
     name: 'Gói Doanh nghiệp',
-    targetAudience: 'Giải pháp toàn diện cho công ty.',
+    targetAudience: 'Giải pháp hạ tầng độc quyền toàn diện cho công ty & MCN lớn.',
     originalPrice: '10.500.000 đ',
     priceFormatted: '8.500.000 đ',
     billingPeriod: '/ tháng',
-    subHighlight: 'Giảm 10% khi thanh toán theo năm',
+    subHighlight: 'Giảm thêm 10% khi thanh toán theo năm',
     popular: false,
     features: [
-      'Tạo không giới hạn video Veo 3 Text to Video/ Video từ Ảnh /Video Đồng nhất',
-      'Tạo không giới hạn Ảnh/Whisk/Nano',
-      'Tải video 720p/1080p',
-      'Số luồng lên đến 20 Luồng',
-      'Tất cả các chức năng tools',
-      'Tối đa 30 máy cùng lúc.',
-      'Không giới hạn Video được tạo trong tháng.',
-      'Sử dụng Sever riêng cho tốc độ tạo video tối ưu.',
-      'Giảm 10% khi thanh toán theo năm.'
+      'Tạo không giới hạn video Veo 3 / Veo 3.1 & Khóa nhân vật đồng nhất 100%',
+      'Toàn quyền sử dụng giọng đọc AI Adam, Ngọc Huyền & Clone giọng nói không giới hạn',
+      'Tạo không giới hạn Ảnh Pro / Whisk / Nano Banana',
+      'Tải video 720p / 1080p Full HD / 4K không giới hạn băng thông',
+      'Mở khóa toàn bộ 12 Module tools cao cấp nhất của Kinx Auto',
+      'Sử dụng đồng thời lên đến 30 máy tính cùng lúc',
+      'Số luồng lên đến 20 Luồng song song trên từng máy',
+      'Không giới hạn số lượng Video được xuất bản trong tháng',
+      'Sử dụng Server riêng (Dedicated Cloud Server) cho tốc độ render tối đa',
+      'Bàn giao tài liệu đào tạo Automation & Hỗ trợ kỹ thuật riêng 24/7'
     ],
-    ctaText: 'Chọn gói doanh nghiệp',
+    ctaText: 'Chọn Gói Doanh Nghiệp',
     ctaType: 'secondary'
   }
 ];

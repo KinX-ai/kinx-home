@@ -12,6 +12,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { InteractiveFlowDemo } from './components/InteractiveFlowDemo';
 import { FeatureDeepDive } from './components/FeatureDeepDive';
+import { DialogueVoiceShowcase } from './components/DialogueVoiceShowcase';
 import { SoftwareGallery } from './components/SoftwareGallery';
 import { RoiCalculator } from './components/RoiCalculator';
 import { ComparisonTable } from './components/ComparisonTable';
@@ -22,7 +23,7 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { SectionCustomizerModal } from './components/SectionCustomizerModal';
 import { LeadModal } from './components/LeadModal';
-import { LegalDisclaimerModal } from './components/LegalDisclaimerModal';
+import { LegalDisclaimerModal, LegalTabType } from './components/LegalDisclaimerModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { FloatingChatWidget } from './components/FloatingChatWidget';
 
@@ -32,7 +33,7 @@ export default function App() {
   const [isCustomizerOpen, setIsCustomizerOpen] = useState<boolean>(false);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState<boolean>(false);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState<boolean>(false);
-  const [legalInitialTab, setLegalInitialTab] = useState<'disclaimer' | 'refund' | 'compliance' | 'privacy' | 'terms'>('disclaimer');
+  const [legalInitialTab, setLegalInitialTab] = useState<LegalTabType>('disclaimer');
 
   const [currentDevice, setCurrentDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
@@ -130,6 +131,22 @@ export default function App() {
             onSelectModule={setActiveModuleId}
             onOpenLeadModal={() => setIsLeadModalOpen(true)}
             onScrollToDownload={scrollToDownload}
+            onOpenLegalModal={(tab) => {
+              if (tab) setLegalInitialTab(tab);
+              setIsLegalModalOpen(true);
+            }}
+          />
+        );
+      case 'dialogue-showcase':
+        return (
+          <DialogueVoiceShowcase
+            key="dialogue-showcase"
+            onOpenLeadModal={() => setIsLeadModalOpen(true)}
+            onScrollToDownload={scrollToDownload}
+            onOpenLegalModal={() => {
+              setLegalInitialTab('aiVoiceDisclaimer');
+              setIsLegalModalOpen(true);
+            }}
           />
         );
       case 'software-gallery':

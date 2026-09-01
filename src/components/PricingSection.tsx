@@ -8,6 +8,54 @@ interface PricingSectionProps {
   onScrollToDownload?: () => void;
 }
 
+const highlightFeatureKeywords = (text: string) => {
+  const keywords = [
+    'Adam',
+    'Ngọc Huyền',
+    'Ngoc Huyen',
+    'Hoài My',
+    'Nam Minh',
+    'KHÔNG GIỚI HẠN',
+    'không giới hạn',
+    'Clone giọng nói',
+    'Voice Cloning',
+    '无限制声音克隆',
+    '無制限ボイスクローン',
+    'Veo 3',
+    'Veo 3.1',
+    '100%',
+    '12 Module',
+    '20 Luồng',
+    '5 máy',
+    '30 máy',
+    'Dedicated Cloud Server',
+    'Ultraview'
+  ];
+
+  const pattern = new RegExp(`(${keywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi');
+  const parts = text.split(pattern);
+
+  return parts.map((part, index) => {
+    const isKeyword = keywords.some(k => k.toLowerCase() === part.toLowerCase());
+    if (isKeyword) {
+      const lower = part.toLowerCase();
+      if (['adam', 'ngọc huyền', 'ngoc huyen', 'clone giọng nói', 'voice cloning', 'không giới hạn', '无限制声音克隆', '無制限ボイスクローン'].includes(lower)) {
+        return (
+          <span key={index} className="font-bold text-cyan-300">
+            {part}
+          </span>
+        );
+      }
+      return (
+        <span key={index} className="font-semibold text-white">
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+};
+
 export const PricingSection: React.FC<PricingSectionProps> = ({
 }) => {
   const { language } = useLanguage();
@@ -153,7 +201,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                   {plan.features.map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-200">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <span className="leading-relaxed">{feat}</span>
+                      <span className="leading-relaxed">{highlightFeatureKeywords(feat)}</span>
                     </div>
                   ))}
                 </div>

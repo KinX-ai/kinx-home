@@ -1,6 +1,7 @@
 // Direct verified CDN image links for Kinx Auto Software mapped exactly to each feature
 export const USER_ATTACHMENT_IMAGES = {
   logo: 'https://sf-static.upanhlaylink.com/img/image_20260821b608760d40342f1a5b6de76aa0204674.jpg', // Logo Kinx Auto
+  voiceDialogue: 'https://cdn.upanhlaylink.com/i/ZIwZ4Wv5.jpg', // Tạo Voice Hội Thoại Đa Dạng Tiếng Nói
   voiceTts: 'https://sf-static.upanhlaylink.com/img/image_20260821da63a3e3c286a3e52ab8b6ac3963204c.jpg', // Tạo voice
   aiScriptGen: 'https://sf-static.upanhlaylink.com/img/image_2026082144415ed4950b5fae22f03af7cfc70b71.jpg', // Tạo Kịch Bản bằng AI
   youtubeAnalyzer: 'https://sf-static.upanhlaylink.com/img/image_20260821bfc8a802180b22f0dc81336c1158866d.jpg', // Kịch bản AI
@@ -21,10 +22,11 @@ export const APP_IMAGES = {
   logo: 'https://sf-static.upanhlaylink.com/img/image_20260821b608760d40342f1a5b6de76aa0204674.jpg',
   socialThumbnail: 'https://sf-static.upanhlaylink.com/img/image_202608219faa7ea163197c48d13778398cf53542.jpg',
   softwareInterface: 'https://sf-static.upanhlaylink.com/img/image_202608219009b01f933dfba60fea5562f595c00d.jpg',
+  voiceDialogue: 'https://cdn.upanhlaylink.com/i/ZIwZ4Wv5.jpg', // Tạo Voice Hội Thoại Đa Dạng Tiếng Nói
+  voiceTts: 'https://sf-static.upanhlaylink.com/img/image_20260821da63a3e3c286a3e52ab8b6ac3963204c.jpg',
   videoFlow: 'https://sf-static.upanhlaylink.com/img/image_202608219009b01f933dfba60fea5562f595c00d.jpg',
   imageToVideo: 'https://sf-static.upanhlaylink.com/img/image_202608219094e2063dfcdc204567b0ba10457a5b.jpg',
   consistentCharacter: 'https://sf-static.upanhlaylink.com/img/image_20260821fd6fa1d43f91ed2271d2902f5a2366fd.jpg',
-  voiceTts: 'https://sf-static.upanhlaylink.com/img/image_20260821da63a3e3c286a3e52ab8b6ac3963204c.jpg',
   aiScriptGen: 'https://sf-static.upanhlaylink.com/img/image_2026082144415ed4950b5fae22f03af7cfc70b71.jpg',
   videoPromptsMaker: 'https://sf-static.upanhlaylink.com/img/image_202608218eb45ee12bf23d984628b11aa94c1333.jpg',
   youtubeAnalyzer: 'https://sf-static.upanhlaylink.com/img/image_20260821bfc8a802180b22f0dc81336c1158866d.jpg',
@@ -34,4 +36,8 @@ export const APP_IMAGES = {
   videoExtension: 'https://sf-static.upanhlaylink.com/img/image_2026082136ae19fd77bddd7dced2d4d2148ee91d.jpg',
   ecommerceKol: 'https://sf-static.upanhlaylink.com/img/image_20260821bbbc2c19420e7a203c3b831340101d4f.jpg',
   creatorGrowth: 'https://sf-static.upanhlaylink.com/img/image_202608219009b01f933dfba60fea5562f595c00d.jpg',
+};
+
+export const AUDIO_SAMPLES = {
+  dialogueConversation: 'https://cdn.hostmora.app/voicekinx/d8b39883-15d4-4809-8c73-4f448dfc955d/kinxts_conv_1788246972701.wav',
 };

@@ -439,3 +439,64 @@ export function speakEdgeTTS({
     stopAllTTS();
   };
 }
+
+// Plays a direct sample audio URL with high compatibility and status callbacks
+export function playSampleAudioUrl({
+  audioUrl,
+  onStart,
+  onEnd,
+  onError,
+  onTimeUpdate,
+}: {
+  audioUrl: string;
+  onStart?: () => void;
+  onEnd?: () => void;
+  onError?: (err: unknown) => void;
+  onTimeUpdate?: (currentTime: number, duration: number) => void;
+}): () => void {
+  if (typeof window === 'undefined') return () => {};
+
+  stopAllTTS();
+
+  try {
+    const audio = new Audio();
+    audio.crossOrigin = 'anonymous';
+    audio.src = audioUrl;
+    globalFallbackAudio = audio;
+
+    audio.onplay = () => onStart?.();
+    audio.onended = () => {
+      if (globalFallbackAudio === audio) globalFallbackAudio = null;
+      onEnd?.();
+    };
+    audio.onerror = (e) => {
+      console.warn('Sample audio playback error:', e);
+      if (globalFallbackAudio === audio) globalFallbackAudio = null;
+      onError?.(e);
+      onEnd?.();
+    };
+    audio.ontimeupdate = () => {
+      onTimeUpdate?.(audio.currentTime, audio.duration || 0);
+    };
+
+    audio.play().catch((playErr) => {
+      console.warn('Auto play notice:', playErr);
+      onError?.(playErr);
+      onEnd?.();
+    });
+
+    return () => {
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+      } catch (e) {
+        // Ignore
+      }
+      if (globalFallbackAudio === audio) globalFallbackAudio = null;
+    };
+  } catch (err) {
+    onError?.(err);
+    onEnd?.();
+    return () => {};
+  }
+}
