@@ -253,7 +253,7 @@ export const DialogueVoiceShowcase: React.FC<DialogueVoiceShowcaseProps> = ({
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
             <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-            <span>Kinx Auto v4.5.8+</span>
+            <span>Kinx Auto v4.6.0+</span>
           </span>
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
             <Users className="w-3.5 h-3.5 text-blue-400" />
