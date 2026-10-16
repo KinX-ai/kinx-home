@@ -142,7 +142,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   };
 
   const rawPrice = plan.priceFormatted.replace(/\D/g, '');
-  const amount = parseInt(rawPrice, 10) || 550000;
+  const amount = parseInt(rawPrice, 10) || 600000;
 
   const uname = userSession.isLoggedIn && userSession.username ? userSession.username : 'user';
   const transactionContent = `${uname} chuyen tien`;
